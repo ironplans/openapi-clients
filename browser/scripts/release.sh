@@ -9,5 +9,4 @@ if ! has_changes; then
 fi
 
 git add --all
-export NODE_ENV=production
 yarn publish --access public --patch
