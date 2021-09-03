@@ -1,6 +1,6 @@
 {
   "name": "@ironplans/api",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "OpenAPI 3 browser client for IronPlans API",
   "files": [
     "dist/**",
@@ -13,10 +13,10 @@
     "clean:dist": "rimraf dist",
     "clean:gen": "rimraf src/{apis,models}",
     "generate": "./scripts/generate.sh",
-    "build": "./scripts/build.js",
-    "types": "tsc -v -p tsconfig.build.json",
-    "prepublish": "npm-run-all clean generate --parallel build types --serial release",
-    "release": "./scripts/release.sh"
+    "build:dist": "./scripts/build.js",
+    "build:types": "tsc -v -p tsconfig.build.json",
+    "release": "npm-run-all clean generate --parallel build:* --serial package",
+    "package": "./scripts/release.sh"
   },
   "repository": {
     "type": "git",

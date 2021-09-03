@@ -9,5 +9,4 @@ if ! has_changes; then
 fi
 
 git add --all
-git commit -m "feat: release"
 yarn publish --access public --patch
