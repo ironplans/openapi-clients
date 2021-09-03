@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-yarn openapi-generator-cli generate \
+cmd=yarn openapi-generator-cli
+
+if which openapi-generator >/dev/null; then
+    cmd=openapi-generator
+fi
+$cmd generate \
     -i "${1:-https://api.ironplans.com}"/openapi.yaml \
     -g typescript-fetch \
     -o src/ \
