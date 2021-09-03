@@ -6,6 +6,7 @@
     "dist/**",
     "src/**"
   ],
+  "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +15,7 @@
     "clean:gen": "rimraf src/{apis,models}",
     "generate": "./scripts/generate.sh",
     "build:dist": "./scripts/build.js",
-    "build:types": "tsc -v -p tsconfig.build.json",
+    "build:types": "tsc -p tsconfig.build.json",
     "release": "npm-run-all clean generate --parallel build:* --serial package",
     "package": "./scripts/release.sh"
   },

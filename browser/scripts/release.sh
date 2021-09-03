@@ -8,7 +8,7 @@ if ! has_changes; then
     exit
 fi
 
-if $NODE_ENV != "production"; then
+if [ "$NODE_ENV" != "production" ]; then
     echo "Not in production, not commiting changes"
     exit 0
 fi
