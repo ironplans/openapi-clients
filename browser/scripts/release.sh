@@ -15,3 +15,4 @@ fi
 
 git add --all
 yarn publish --access public --patch
+git push --tags
