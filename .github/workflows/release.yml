@@ -20,11 +20,10 @@ jobs:
         git config --global user.email "bot@ironplans.com"
         git config --global user.name "Iron Robot"
         
-    - name: Setup project
+    - name: Release
       working-directory: ./browser
       run: |
         yarn install --frozen-lockfile
-    
-    - name: Release
-      run: NODE_ENV=production yarn release
+        NODE_ENV=production yarn release
+      
         
