@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-openapi-generator generate \
+yarn openapi-generator-cli generate \
     -i "${1:-https://api.ironplans.com}"/openapi.yaml \
     -g typescript-fetch \
     -o src/ \
