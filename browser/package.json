@@ -7,7 +7,7 @@
     "src/**"
   ],
   "types": "dist/index.d.ts",
-  "main": "dist/index.js",
+  "main": "dist/index.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "run-p clean:* ",
