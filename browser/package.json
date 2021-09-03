@@ -1,0 +1,39 @@
+{
+  "name": "@ironplans/api",
+  "version": "0.0.1",
+  "description": "OpenAPI 3 browser client for IronPlans API",
+  "files": [
+    "dist/**",
+    "src/**"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean" : "run-p clean:* ",
+    "clean:dist": "rimraf dist",
+    "clean:gen": "rimraf src/{apis,models}",
+    "generate": "./scripts/generate.sh",
+    "build": "./scripts/build.js",
+    "types": "tsc -v -p tsconfig.build.json",
+    "release": "npm-run-all clean generate --parallel build types"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ironplans/openapi-clients.git"
+  },
+  "author": "team@ironplans.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ironplans/openapi-clients/issues"
+  },
+  "homepage": "https://github.com/ironplans/openapi-clients#readme",
+  "devDependencies": {
+    "esbuild": "^0.12.25",
+    "npm-run-all": "^4.1.5",
+    "tsc": "^2.0.3",
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "rimraf": "^3.0.2"
+  }
+}
