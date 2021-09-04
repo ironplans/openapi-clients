@@ -16,7 +16,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: v16
-        cache: yarn
 
     - name: Setup git
       run: |
@@ -25,8 +24,11 @@ jobs:
         
     - name: Release
       working-directory: ./browser
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NODE_ENV: production
       run: |
         yarn install --frozen-lockfile
-        NODE_ENV=production yarn release
+        yarn release
       
         
