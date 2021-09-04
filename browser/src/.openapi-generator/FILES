@@ -13,6 +13,7 @@ apis/TeamsApi.ts
 apis/TokensApi.ts
 apis/index.ts
 index.ts
+models/Account.ts
 models/AggregationEnum.ts
 models/CreateInviteRequest.ts
 models/Customer.ts

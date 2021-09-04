@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+export * from './Account';
 export * from './AggregationEnum';
 export * from './CreateInviteRequest';
 export * from './Customer';
