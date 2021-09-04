@@ -21,14 +21,13 @@ jobs:
       run: |
         git config --global user.email "bot@ironplans.com"
         git config --global user.name "Iron Robot"
-        
+    - run: yarn install --frozen-lockfile
+      working-directory: ./browser
     - name: Release
       working-directory: ./browser
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         NODE_ENV: production
-      run: |
-        yarn install --frozen-lockfile
-        yarn release
+      run: yarn release
       
         
