@@ -36,6 +36,36 @@ export interface ProviderRequest {
      * @type {string}
      * @memberof ProviderRequest
      */
+    authUrl?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderRequest
+     */
+    homeUrl?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderRequest
+     */
+    defaultPlan?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProviderRequest
+     */
+    trialDays?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ProviderRequest
+     */
+    isCardRequired?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProviderRequest
+     */
     ownerId: string;
 }
 
@@ -51,6 +81,11 @@ export function ProviderRequestFromJSONTyped(json: any, ignoreDiscriminator: boo
         
         'name': json['name'],
         'slug': json['slug'],
+        'authUrl': !exists(json, 'auth_url') ? undefined : json['auth_url'],
+        'homeUrl': !exists(json, 'home_url') ? undefined : json['home_url'],
+        'defaultPlan': !exists(json, 'default_plan') ? undefined : json['default_plan'],
+        'trialDays': !exists(json, 'trial_days') ? undefined : json['trial_days'],
+        'isCardRequired': !exists(json, 'is_card_required') ? undefined : json['is_card_required'],
         'ownerId': json['owner_id'],
     };
 }
@@ -66,6 +101,11 @@ export function ProviderRequestToJSON(value?: ProviderRequest | null): any {
         
         'name': value.name,
         'slug': value.slug,
+        'auth_url': value.authUrl,
+        'home_url': value.homeUrl,
+        'default_plan': value.defaultPlan,
+        'trial_days': value.trialDays,
+        'is_card_required': value.isCardRequired,
         'owner_id': value.ownerId,
     };
 }

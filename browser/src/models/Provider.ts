@@ -42,6 +42,36 @@ export interface Provider {
      * @type {string}
      * @memberof Provider
      */
+    authUrl?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Provider
+     */
+    homeUrl?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Provider
+     */
+    defaultPlan?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Provider
+     */
+    trialDays?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Provider
+     */
+    isCardRequired?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Provider
+     */
     readonly stripeAccountId: string;
 }
 
@@ -58,6 +88,11 @@ export function ProviderFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'id': json['id'],
         'name': json['name'],
         'slug': json['slug'],
+        'authUrl': !exists(json, 'auth_url') ? undefined : json['auth_url'],
+        'homeUrl': !exists(json, 'home_url') ? undefined : json['home_url'],
+        'defaultPlan': !exists(json, 'default_plan') ? undefined : json['default_plan'],
+        'trialDays': !exists(json, 'trial_days') ? undefined : json['trial_days'],
+        'isCardRequired': !exists(json, 'is_card_required') ? undefined : json['is_card_required'],
         'stripeAccountId': json['stripe_account_id'],
     };
 }
@@ -73,6 +108,11 @@ export function ProviderToJSON(value?: Provider | null): any {
         
         'name': value.name,
         'slug': value.slug,
+        'auth_url': value.authUrl,
+        'home_url': value.homeUrl,
+        'default_plan': value.defaultPlan,
+        'trial_days': value.trialDays,
+        'is_card_required': value.isCardRequired,
     };
 }
 
