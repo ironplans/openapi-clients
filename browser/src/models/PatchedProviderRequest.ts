@@ -36,6 +36,36 @@ export interface PatchedProviderRequest {
      * @type {string}
      * @memberof PatchedProviderRequest
      */
+    authUrl?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PatchedProviderRequest
+     */
+    homeUrl?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PatchedProviderRequest
+     */
+    defaultPlan?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof PatchedProviderRequest
+     */
+    trialDays?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PatchedProviderRequest
+     */
+    isCardRequired?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof PatchedProviderRequest
+     */
     ownerId?: string;
 }
 
@@ -51,6 +81,11 @@ export function PatchedProviderRequestFromJSONTyped(json: any, ignoreDiscriminat
         
         'name': !exists(json, 'name') ? undefined : json['name'],
         'slug': !exists(json, 'slug') ? undefined : json['slug'],
+        'authUrl': !exists(json, 'auth_url') ? undefined : json['auth_url'],
+        'homeUrl': !exists(json, 'home_url') ? undefined : json['home_url'],
+        'defaultPlan': !exists(json, 'default_plan') ? undefined : json['default_plan'],
+        'trialDays': !exists(json, 'trial_days') ? undefined : json['trial_days'],
+        'isCardRequired': !exists(json, 'is_card_required') ? undefined : json['is_card_required'],
         'ownerId': !exists(json, 'owner_id') ? undefined : json['owner_id'],
     };
 }
@@ -66,6 +101,11 @@ export function PatchedProviderRequestToJSON(value?: PatchedProviderRequest | nu
         
         'name': value.name,
         'slug': value.slug,
+        'auth_url': value.authUrl,
+        'home_url': value.homeUrl,
+        'default_plan': value.defaultPlan,
+        'trial_days': value.trialDays,
+        'is_card_required': value.isCardRequired,
         'owner_id': value.ownerId,
     };
 }

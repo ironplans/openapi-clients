@@ -46,10 +46,10 @@ export interface Account {
     readonly email: string;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof Account
      */
-    readonly isVerified: string;
+    readonly isVerified: boolean;
 }
 
 export function AccountFromJSON(json: any): Account {
