@@ -82,6 +82,12 @@ export interface TeamDetail {
     readonly subscription: Subscription;
     /**
      * 
+     * @type {Array<Plan>}
+     * @memberof TeamDetail
+     */
+    readonly availablePlans: Array<Plan>;
+    /**
+     * 
      * @type {Date}
      * @memberof TeamDetail
      */
@@ -111,6 +117,7 @@ export function TeamDetailFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'invites': ((json['invites'] as Array<any>).map(InviteFromJSON)),
         'plan': PlanFromJSON(json['plan']),
         'subscription': SubscriptionFromJSON(json['subscription']),
+        'availablePlans': ((json['available_plans'] as Array<any>).map(PlanFromJSON)),
         'createdAt': (new Date(json['created_at'])),
         'updatedAt': (new Date(json['updated_at'])),
     };

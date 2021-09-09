@@ -20,6 +20,10 @@ import {
     CreateInviteRequestToJSON,
 } from '../models';
 
+export interface InvitesV1ClaimRetrieveRequest {
+    token: string;
+}
+
 export interface InvitesV1CreateRequest {
     createInviteRequest: CreateInviteRequest;
 }
@@ -32,8 +36,16 @@ export class InvitesApi extends runtime.BaseAPI {
     /**
      * Claim an invite and be redirected to provider\'s auth url.
      */
-    async invitesV1ClaimRetrieveRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+    async invitesV1ClaimRetrieveRaw(requestParameters: InvitesV1ClaimRetrieveRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.token === null || requestParameters.token === undefined) {
+            throw new runtime.RequiredError('token','Required parameter requestParameters.token was null or undefined when calling invitesV1ClaimRetrieve.');
+        }
+
         const queryParameters: any = {};
+
+        if (requestParameters.token !== undefined) {
+            queryParameters['token'] = requestParameters.token;
+        }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
@@ -55,8 +67,8 @@ export class InvitesApi extends runtime.BaseAPI {
     /**
      * Claim an invite and be redirected to provider\'s auth url.
      */
-    async invitesV1ClaimRetrieve(initOverrides?: RequestInit): Promise<void> {
-        await this.invitesV1ClaimRetrieveRaw(initOverrides);
+    async invitesV1ClaimRetrieve(requestParameters: InvitesV1ClaimRetrieveRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.invitesV1ClaimRetrieveRaw(requestParameters, initOverrides);
     }
 
     /**

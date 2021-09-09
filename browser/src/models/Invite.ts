@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    PublicProfile,
+    PublicProfileFromJSON,
+    PublicProfileFromJSONTyped,
+    PublicProfileToJSON,
+} from './';
+
 /**
  * 
  * @export
@@ -27,10 +34,10 @@ export interface Invite {
     readonly id: string;
     /**
      * 
-     * @type {string}
+     * @type {PublicProfile}
      * @memberof Invite
      */
-    sentBy: string;
+    readonly sentBy: PublicProfile;
     /**
      * 
      * @type {string}
@@ -68,7 +75,7 @@ export function InviteFromJSONTyped(json: any, ignoreDiscriminator: boolean): In
     return {
         
         'id': json['id'],
-        'sentBy': json['sent_by'],
+        'sentBy': PublicProfileFromJSON(json['sent_by']),
         'sentToEmail': json['sent_to_email'],
         'isClaimed': !exists(json, 'is_claimed') ? undefined : json['is_claimed'],
         'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
@@ -85,7 +92,6 @@ export function InviteToJSON(value?: Invite | null): any {
     }
     return {
         
-        'sent_by': value.sentBy,
         'sent_to_email': value.sentToEmail,
         'is_claimed': value.isClaimed,
         'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),

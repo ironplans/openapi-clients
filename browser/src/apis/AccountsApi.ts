@@ -26,36 +26,6 @@ import {
 export class AccountsApi extends runtime.BaseAPI {
 
     /**
-     * ViewSet for _Comrade_ customers\' accounts.
-     */
-    async accountsV1LoginCreateRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.accessToken) {
-            // oauth required
-            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
-        }
-
-        const response = await this.request({
-            path: `/accounts/v1/login/`,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-        }, initOverrides);
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * ViewSet for _Comrade_ customers\' accounts.
-     */
-    async accountsV1LoginCreate(initOverrides?: RequestInit): Promise<void> {
-        await this.accountsV1LoginCreateRaw(initOverrides);
-    }
-
-    /**
      * Shortcut to `/accounts/v1/{{my customer id}}`.  Automatically creates a new customer account if one does not exist for the authenticated user.
      */
     async accountsV1MeRetrieveRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<Account>> {

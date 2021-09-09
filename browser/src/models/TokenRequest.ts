@@ -24,7 +24,7 @@ export interface TokenRequest {
      * @type {string}
      * @memberof TokenRequest
      */
-    providerId: string;
+    providerId?: string;
     /**
      * 
      * @type {boolean}
@@ -49,7 +49,7 @@ export function TokenRequestFromJSONTyped(json: any, ignoreDiscriminator: boolea
     }
     return {
         
-        'providerId': json['provider_id'],
+        'providerId': !exists(json, 'provider_id') ? undefined : json['provider_id'],
         'isActive': !exists(json, 'is_active') ? undefined : json['is_active'],
         'isPublic': !exists(json, 'is_public') ? undefined : json['is_public'],
     };

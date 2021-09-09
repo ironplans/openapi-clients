@@ -30,7 +30,7 @@ import {
 } from '../models';
 
 export interface TokensV1CreateRequest {
-    tokenRequest: TokenRequest;
+    tokenRequest?: TokenRequest;
 }
 
 export interface TokensV1DestroyRequest {
@@ -53,7 +53,7 @@ export interface TokensV1RetrieveRequest {
 
 export interface TokensV1UpdateRequest {
     id: string;
-    tokenRequest: TokenRequest;
+    tokenRequest?: TokenRequest;
 }
 
 /**
@@ -65,10 +65,6 @@ export class TokensApi extends runtime.BaseAPI {
      * Management of Provider Tokens.
      */
     async tokensV1CreateRaw(requestParameters: TokensV1CreateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Token>> {
-        if (requestParameters.tokenRequest === null || requestParameters.tokenRequest === undefined) {
-            throw new runtime.RequiredError('tokenRequest','Required parameter requestParameters.tokenRequest was null or undefined when calling tokensV1Create.');
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -251,10 +247,6 @@ export class TokensApi extends runtime.BaseAPI {
     async tokensV1UpdateRaw(requestParameters: TokensV1UpdateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Token>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling tokensV1Update.');
-        }
-
-        if (requestParameters.tokenRequest === null || requestParameters.tokenRequest === undefined) {
-            throw new runtime.RequiredError('tokenRequest','Required parameter requestParameters.tokenRequest was null or undefined when calling tokensV1Update.');
         }
 
         const queryParameters: any = {};

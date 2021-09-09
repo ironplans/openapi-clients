@@ -24,12 +24,6 @@ export interface InviteRequest {
      * @type {string}
      * @memberof InviteRequest
      */
-    sentBy: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InviteRequest
-     */
     sentToEmail: string;
     /**
      * 
@@ -55,7 +49,6 @@ export function InviteRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'sentBy': json['sent_by'],
         'sentToEmail': json['sent_to_email'],
         'isClaimed': !exists(json, 'is_claimed') ? undefined : json['is_claimed'],
         'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
@@ -71,7 +64,6 @@ export function InviteRequestToJSON(value?: InviteRequest | null): any {
     }
     return {
         
-        'sent_by': value.sentBy,
         'sent_to_email': value.sentToEmail,
         'is_claimed': value.isClaimed,
         'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),

@@ -30,7 +30,7 @@ export interface Token {
      * @type {string}
      * @memberof Token
      */
-    providerId: string;
+    providerId?: string;
     /**
      * 
      * @type {string}
@@ -74,7 +74,7 @@ export function TokenFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tok
     return {
         
         'id': json['id'],
-        'providerId': json['provider_id'],
+        'providerId': !exists(json, 'provider_id') ? undefined : json['provider_id'],
         'token': json['token'],
         'isActive': !exists(json, 'is_active') ? undefined : json['is_active'],
         'isPublic': !exists(json, 'is_public') ? undefined : json['is_public'],

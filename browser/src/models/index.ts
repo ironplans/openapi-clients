@@ -36,6 +36,7 @@ export * from './PlanFeatureRequest';
 export * from './PlanRequest';
 export * from './Provider';
 export * from './ProviderRequest';
+export * from './PublicProfile';
 export * from './RecordPeriodEnum';
 export * from './RoleEnum';
 export * from './Subscription';

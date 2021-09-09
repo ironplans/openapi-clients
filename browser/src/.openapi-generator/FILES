@@ -2,12 +2,10 @@ apis/AccountsApi.ts
 apis/CustomersApi.ts
 apis/FeaturesApi.ts
 apis/FeaturespecsApi.ts
-apis/HealthzApi.ts
 apis/InvitesApi.ts
 apis/OpenapiYamlApi.ts
 apis/PlansApi.ts
 apis/ProvidersApi.ts
-apis/PublicApi.ts
 apis/SubscriptionsApi.ts
 apis/TeamsApi.ts
 apis/TokensApi.ts
@@ -49,6 +47,7 @@ models/PlanFeatureRequest.ts
 models/PlanRequest.ts
 models/Provider.ts
 models/ProviderRequest.ts
+models/PublicProfile.ts
 models/RecordPeriodEnum.ts
 models/RoleEnum.ts
 models/Subscription.ts

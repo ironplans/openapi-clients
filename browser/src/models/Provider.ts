@@ -72,6 +72,12 @@ export interface Provider {
      * @type {string}
      * @memberof Provider
      */
+    ownerId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Provider
+     */
     readonly stripeAccountId: string;
 }
 
@@ -93,6 +99,7 @@ export function ProviderFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'defaultPlan': !exists(json, 'default_plan') ? undefined : json['default_plan'],
         'trialDays': !exists(json, 'trial_days') ? undefined : json['trial_days'],
         'isCardRequired': !exists(json, 'is_card_required') ? undefined : json['is_card_required'],
+        'ownerId': json['owner_id'],
         'stripeAccountId': json['stripe_account_id'],
     };
 }
@@ -113,6 +120,7 @@ export function ProviderToJSON(value?: Provider | null): any {
         'default_plan': value.defaultPlan,
         'trial_days': value.trialDays,
         'is_card_required': value.isCardRequired,
+        'owner_id': value.ownerId,
     };
 }
 
