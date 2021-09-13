@@ -61,12 +61,6 @@ export interface PatchedProviderRequest {
      * @memberof PatchedProviderRequest
      */
     isCardRequired?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof PatchedProviderRequest
-     */
-    ownerId?: string;
 }
 
 export function PatchedProviderRequestFromJSON(json: any): PatchedProviderRequest {
@@ -86,7 +80,6 @@ export function PatchedProviderRequestFromJSONTyped(json: any, ignoreDiscriminat
         'defaultPlan': !exists(json, 'default_plan') ? undefined : json['default_plan'],
         'trialDays': !exists(json, 'trial_days') ? undefined : json['trial_days'],
         'isCardRequired': !exists(json, 'is_card_required') ? undefined : json['is_card_required'],
-        'ownerId': !exists(json, 'owner_id') ? undefined : json['owner_id'],
     };
 }
 
@@ -106,7 +99,6 @@ export function PatchedProviderRequestToJSON(value?: PatchedProviderRequest | nu
         'default_plan': value.defaultPlan,
         'trial_days': value.trialDays,
         'is_card_required': value.isCardRequired,
-        'owner_id': value.ownerId,
     };
 }
 

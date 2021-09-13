@@ -27,6 +27,9 @@ import {
     ProviderRequest,
     ProviderRequestFromJSON,
     ProviderRequestToJSON,
+    Slug,
+    SlugFromJSON,
+    SlugToJSON,
 } from '../models';
 
 export interface ProvidersV1CreateRequest {
@@ -49,6 +52,10 @@ export interface ProvidersV1PartialUpdateRequest {
 
 export interface ProvidersV1RetrieveRequest {
     id: string;
+}
+
+export interface ProvidersV1SlugRetrieveRequest {
+    slug?: string;
 }
 
 export interface ProvidersV1StripeCreateRequest {
@@ -241,6 +248,39 @@ export class ProvidersApi extends runtime.BaseAPI {
      */
     async providersV1Retrieve(requestParameters: ProvidersV1RetrieveRequest, initOverrides?: RequestInit): Promise<Provider> {
         const response = await this.providersV1RetrieveRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async providersV1SlugRetrieveRaw(requestParameters: ProvidersV1SlugRetrieveRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Slug>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.slug !== undefined) {
+            queryParameters['slug'] = requestParameters.slug;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/providers/v1/slug/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SlugFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async providersV1SlugRetrieve(requestParameters: ProvidersV1SlugRetrieveRequest, initOverrides?: RequestInit): Promise<Slug> {
+        const response = await this.providersV1SlugRetrieveRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -30,13 +30,13 @@ export interface Subscription {
      * @type {string}
      * @memberof Subscription
      */
-    readonly planId: string;
+    planId: string;
     /**
      * 
      * @type {string}
      * @memberof Subscription
      */
-    readonly teamId: string;
+    teamId: string;
     /**
      * 
      * @type {Date}
@@ -78,6 +78,8 @@ export function SubscriptionToJSON(value?: Subscription | null): any {
     }
     return {
         
+        'plan_id': value.planId,
+        'team_id': value.teamId,
         'start_at': (value.startAt.toISOString()),
         'end_at': value.endAt === undefined ? undefined : (value.endAt === null ? null : value.endAt.toISOString()),
     };

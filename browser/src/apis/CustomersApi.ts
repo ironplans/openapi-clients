@@ -18,6 +18,9 @@ import {
     Customer,
     CustomerFromJSON,
     CustomerToJSON,
+    CustomerPaymentIntentRequest,
+    CustomerPaymentIntentRequestFromJSON,
+    CustomerPaymentIntentRequestToJSON,
     CustomerRequest,
     CustomerRequestFromJSON,
     CustomerRequestToJSON,
@@ -36,6 +39,9 @@ import {
     PatchedCustomerRequest,
     PatchedCustomerRequestFromJSON,
     PatchedCustomerRequestToJSON,
+    PaymentIntentResponse,
+    PaymentIntentResponseFromJSON,
+    PaymentIntentResponseToJSON,
 } from '../models';
 
 export interface CustomersV1CreateRequest {
@@ -58,6 +64,10 @@ export interface CustomersV1OidcExchangeCreateRequest {
 export interface CustomersV1PartialUpdateRequest {
     id: string;
     patchedCustomerRequest?: PatchedCustomerRequest;
+}
+
+export interface CustomersV1PaymentIntentCreateRequest {
+    customerPaymentIntentRequest: CustomerPaymentIntentRequest;
 }
 
 export interface CustomersV1RetrieveRequest {
@@ -252,6 +262,42 @@ export class CustomersApi extends runtime.BaseAPI {
      */
     async customersV1PartialUpdate(requestParameters: CustomersV1PartialUpdateRequest, initOverrides?: RequestInit): Promise<Customer> {
         const response = await this.customersV1PartialUpdateRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async customersV1PaymentIntentCreateRaw(requestParameters: CustomersV1PaymentIntentCreateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PaymentIntentResponse>> {
+        if (requestParameters.customerPaymentIntentRequest === null || requestParameters.customerPaymentIntentRequest === undefined) {
+            throw new runtime.RequiredError('customerPaymentIntentRequest','Required parameter requestParameters.customerPaymentIntentRequest was null or undefined when calling customersV1PaymentIntentCreate.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/customers/v1/payment_intent/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CustomerPaymentIntentRequestToJSON(requestParameters.customerPaymentIntentRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaymentIntentResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async customersV1PaymentIntentCreate(requestParameters: CustomersV1PaymentIntentCreateRequest, initOverrides?: RequestInit): Promise<PaymentIntentResponse> {
+        const response = await this.customersV1PaymentIntentCreateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

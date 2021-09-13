@@ -21,6 +21,18 @@ import { exists, mapValues } from '../runtime';
 export interface PatchedSubscriptionRequest {
     /**
      * 
+     * @type {string}
+     * @memberof PatchedSubscriptionRequest
+     */
+    planId?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PatchedSubscriptionRequest
+     */
+    teamId?: string;
+    /**
+     * 
      * @type {Date}
      * @memberof PatchedSubscriptionRequest
      */
@@ -43,6 +55,8 @@ export function PatchedSubscriptionRequestFromJSONTyped(json: any, ignoreDiscrim
     }
     return {
         
+        'planId': !exists(json, 'plan_id') ? undefined : json['plan_id'],
+        'teamId': !exists(json, 'team_id') ? undefined : json['team_id'],
         'startAt': !exists(json, 'start_at') ? undefined : (new Date(json['start_at'])),
         'endAt': !exists(json, 'end_at') ? undefined : (json['end_at'] === null ? null : new Date(json['end_at'])),
     };
@@ -57,6 +71,8 @@ export function PatchedSubscriptionRequestToJSON(value?: PatchedSubscriptionRequ
     }
     return {
         
+        'plan_id': value.planId,
+        'team_id': value.teamId,
         'start_at': value.startAt === undefined ? undefined : (value.startAt.toISOString()),
         'end_at': value.endAt === undefined ? undefined : (value.endAt === null ? null : value.endAt.toISOString()),
     };

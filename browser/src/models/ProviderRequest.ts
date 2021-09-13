@@ -61,12 +61,6 @@ export interface ProviderRequest {
      * @memberof ProviderRequest
      */
     isCardRequired?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProviderRequest
-     */
-    ownerId: string;
 }
 
 export function ProviderRequestFromJSON(json: any): ProviderRequest {
@@ -86,7 +80,6 @@ export function ProviderRequestFromJSONTyped(json: any, ignoreDiscriminator: boo
         'defaultPlan': !exists(json, 'default_plan') ? undefined : json['default_plan'],
         'trialDays': !exists(json, 'trial_days') ? undefined : json['trial_days'],
         'isCardRequired': !exists(json, 'is_card_required') ? undefined : json['is_card_required'],
-        'ownerId': json['owner_id'],
     };
 }
 
@@ -106,7 +99,6 @@ export function ProviderRequestToJSON(value?: ProviderRequest | null): any {
         'default_plan': value.defaultPlan,
         'trial_days': value.trialDays,
         'is_card_required': value.isCardRequired,
-        'owner_id': value.ownerId,
     };
 }
 

@@ -21,6 +21,18 @@ import { exists, mapValues } from '../runtime';
 export interface SubscriptionRequest {
     /**
      * 
+     * @type {string}
+     * @memberof SubscriptionRequest
+     */
+    planId: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SubscriptionRequest
+     */
+    teamId: string;
+    /**
+     * 
      * @type {Date}
      * @memberof SubscriptionRequest
      */
@@ -43,6 +55,8 @@ export function SubscriptionRequestFromJSONTyped(json: any, ignoreDiscriminator:
     }
     return {
         
+        'planId': json['plan_id'],
+        'teamId': json['team_id'],
         'startAt': (new Date(json['start_at'])),
         'endAt': !exists(json, 'end_at') ? undefined : (json['end_at'] === null ? null : new Date(json['end_at'])),
     };
@@ -57,6 +71,8 @@ export function SubscriptionRequestToJSON(value?: SubscriptionRequest | null): a
     }
     return {
         
+        'plan_id': value.planId,
+        'team_id': value.teamId,
         'start_at': (value.startAt.toISOString()),
         'end_at': value.endAt === undefined ? undefined : (value.endAt === null ? null : value.endAt.toISOString()),
     };

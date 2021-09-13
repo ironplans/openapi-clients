@@ -36,7 +36,7 @@ export interface Feature {
      * @type {string}
      * @memberof Feature
      */
-    slug?: string | null;
+    slug?: string;
     /**
      * 
      * @type {string}
@@ -49,6 +49,12 @@ export interface Feature {
      * @memberof Feature
      */
     tooltip?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Feature
+     */
+    readonly isBuiltin: boolean;
 }
 
 export function FeatureFromJSON(json: any): Feature {
@@ -66,6 +72,7 @@ export function FeatureFromJSONTyped(json: any, ignoreDiscriminator: boolean): F
         'slug': !exists(json, 'slug') ? undefined : json['slug'],
         'display': !exists(json, 'display') ? undefined : json['display'],
         'tooltip': !exists(json, 'tooltip') ? undefined : json['tooltip'],
+        'isBuiltin': json['is_builtin'],
     };
 }
 

@@ -72,7 +72,7 @@ export interface Provider {
      * @type {string}
      * @memberof Provider
      */
-    ownerId: string;
+    readonly ownerId: string;
     /**
      * 
      * @type {string}
@@ -120,7 +120,6 @@ export function ProviderToJSON(value?: Provider | null): any {
         'default_plan': value.defaultPlan,
         'trial_days': value.trialDays,
         'is_card_required': value.isCardRequired,
-        'owner_id': value.ownerId,
     };
 }
 
