@@ -14,6 +14,7 @@
     "clean:dist": "rimraf dist",
     "clean:gen": "rimraf src/{apis,models}",
     "generate": "./scripts/generate.sh",
+    "build": "run-p build:*",
     "build:dist": "./scripts/build.js",
     "build:types": "tsc -p tsconfig.build.json",
     "release": "npm-run-all clean generate --parallel build:* --serial package",
