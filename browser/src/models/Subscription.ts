@@ -49,6 +49,12 @@ export interface Subscription {
      * @memberof Subscription
      */
     endAt?: Date | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Subscription
+     */
+    isPaused?: boolean;
 }
 
 export function SubscriptionFromJSON(json: any): Subscription {
@@ -66,6 +72,7 @@ export function SubscriptionFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'teamId': json['team_id'],
         'startAt': (new Date(json['start_at'])),
         'endAt': !exists(json, 'end_at') ? undefined : (json['end_at'] === null ? null : new Date(json['end_at'])),
+        'isPaused': !exists(json, 'is_paused') ? undefined : json['is_paused'],
     };
 }
 
@@ -82,6 +89,7 @@ export function SubscriptionToJSON(value?: Subscription | null): any {
         'team_id': value.teamId,
         'start_at': (value.startAt.toISOString()),
         'end_at': value.endAt === undefined ? undefined : (value.endAt === null ? null : value.endAt.toISOString()),
+        'is_paused': value.isPaused,
     };
 }
 
