@@ -303,6 +303,35 @@ export class CustomersApi extends runtime.BaseAPI {
 
     /**
      */
+    async customersV1RenewTokenCreateRaw(initOverrides?: RequestInit): Promise<runtime.ApiResponse<CustomerTokenResponse>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/customers/v1/renew_token/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CustomerTokenResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async customersV1RenewTokenCreate(initOverrides?: RequestInit): Promise<CustomerTokenResponse> {
+        const response = await this.customersV1RenewTokenCreateRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
     async customersV1RetrieveRaw(requestParameters: CustomersV1RetrieveRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Customer>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling customersV1Retrieve.');

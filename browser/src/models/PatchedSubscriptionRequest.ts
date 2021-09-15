@@ -33,22 +33,16 @@ export interface PatchedSubscriptionRequest {
     teamId?: string;
     /**
      * 
-     * @type {Date}
+     * @type {boolean}
      * @memberof PatchedSubscriptionRequest
      */
-    startAt?: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof PatchedSubscriptionRequest
-     */
-    endAt?: Date | null;
+    isPaused?: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof PatchedSubscriptionRequest
      */
-    isPaused?: boolean;
+    isActive?: boolean;
 }
 
 export function PatchedSubscriptionRequestFromJSON(json: any): PatchedSubscriptionRequest {
@@ -63,9 +57,8 @@ export function PatchedSubscriptionRequestFromJSONTyped(json: any, ignoreDiscrim
         
         'planId': !exists(json, 'plan_id') ? undefined : json['plan_id'],
         'teamId': !exists(json, 'team_id') ? undefined : json['team_id'],
-        'startAt': !exists(json, 'start_at') ? undefined : (new Date(json['start_at'])),
-        'endAt': !exists(json, 'end_at') ? undefined : (json['end_at'] === null ? null : new Date(json['end_at'])),
         'isPaused': !exists(json, 'is_paused') ? undefined : json['is_paused'],
+        'isActive': !exists(json, 'is_active') ? undefined : json['is_active'],
     };
 }
 
@@ -80,9 +73,8 @@ export function PatchedSubscriptionRequestToJSON(value?: PatchedSubscriptionRequ
         
         'plan_id': value.planId,
         'team_id': value.teamId,
-        'start_at': value.startAt === undefined ? undefined : (value.startAt.toISOString()),
-        'end_at': value.endAt === undefined ? undefined : (value.endAt === null ? null : value.endAt.toISOString()),
         'is_paused': value.isPaused,
+        'is_active': value.isActive,
     };
 }
 
