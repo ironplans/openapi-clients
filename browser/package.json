@@ -1,6 +1,6 @@
 {
   "name": "@ironplans/api",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "OpenAPI 3 browser client for IronPlans API",
   "files": [
     "dist/**",

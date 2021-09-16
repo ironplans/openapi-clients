@@ -22,10 +22,10 @@ import {
     PlanFromJSON,
     PlanFromJSONTyped,
     PlanToJSON,
-    Subscription,
-    SubscriptionFromJSON,
-    SubscriptionFromJSONTyped,
-    SubscriptionToJSON,
+    SubscriptionDetail,
+    SubscriptionDetailFromJSON,
+    SubscriptionDetailFromJSONTyped,
+    SubscriptionDetailToJSON,
     Teammate,
     TeammateFromJSON,
     TeammateFromJSONTyped,
@@ -70,16 +70,10 @@ export interface TeamDetail {
     readonly invites: Array<Invite>;
     /**
      * 
-     * @type {Plan}
+     * @type {SubscriptionDetail}
      * @memberof TeamDetail
      */
-    readonly plan: Plan;
-    /**
-     * 
-     * @type {Subscription}
-     * @memberof TeamDetail
-     */
-    readonly subscription: Subscription;
+    readonly subscription: SubscriptionDetail;
     /**
      * 
      * @type {Array<Plan>}
@@ -115,8 +109,7 @@ export function TeamDetailFromJSONTyped(json: any, ignoreDiscriminator: boolean)
         'name': json['name'],
         'members': ((json['members'] as Array<any>).map(TeammateFromJSON)),
         'invites': ((json['invites'] as Array<any>).map(InviteFromJSON)),
-        'plan': PlanFromJSON(json['plan']),
-        'subscription': SubscriptionFromJSON(json['subscription']),
+        'subscription': SubscriptionDetailFromJSON(json['subscription']),
         'availablePlans': ((json['available_plans'] as Array<any>).map(PlanFromJSON)),
         'createdAt': (new Date(json['created_at'])),
         'updatedAt': (new Date(json['updated_at'])),

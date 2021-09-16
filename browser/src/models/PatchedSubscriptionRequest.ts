@@ -37,12 +37,6 @@ export interface PatchedSubscriptionRequest {
      * @memberof PatchedSubscriptionRequest
      */
     isPaused?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof PatchedSubscriptionRequest
-     */
-    isActive?: boolean;
 }
 
 export function PatchedSubscriptionRequestFromJSON(json: any): PatchedSubscriptionRequest {
@@ -58,7 +52,6 @@ export function PatchedSubscriptionRequestFromJSONTyped(json: any, ignoreDiscrim
         'planId': !exists(json, 'plan_id') ? undefined : json['plan_id'],
         'teamId': !exists(json, 'team_id') ? undefined : json['team_id'],
         'isPaused': !exists(json, 'is_paused') ? undefined : json['is_paused'],
-        'isActive': !exists(json, 'is_active') ? undefined : json['is_active'],
     };
 }
 
@@ -74,7 +67,6 @@ export function PatchedSubscriptionRequestToJSON(value?: PatchedSubscriptionRequ
         'plan_id': value.planId,
         'team_id': value.teamId,
         'is_paused': value.isPaused,
-        'is_active': value.isActive,
     };
 }
 

@@ -26,6 +26,7 @@ models/IDTokenExchangeRequest.ts
 models/Invite.ts
 models/InviteRequest.ts
 models/IssueCustomerTokenRequest.ts
+models/OpEnum.ts
 models/PaginatedCustomerList.ts
 models/PaginatedFeatureList.ts
 models/PaginatedFeatureSpecList.ts
@@ -34,10 +35,12 @@ models/PaginatedProviderList.ts
 models/PaginatedSubscriptionList.ts
 models/PaginatedTeamList.ts
 models/PaginatedTokenList.ts
+models/PaginatedUsageList.ts
 models/PatchedCustomerRequest.ts
 models/PatchedFeatureRequest.ts
 models/PatchedFeatureSpecRequest.ts
 models/PatchedPlanRequest.ts
+models/PatchedPlanSwitchRequest.ts
 models/PatchedProviderRequest.ts
 models/PatchedSubscriptionRequest.ts
 models/PatchedTeamDetailRequest.ts
@@ -51,9 +54,11 @@ models/Provider.ts
 models/ProviderRequest.ts
 models/PublicProfile.ts
 models/RecordPeriodEnum.ts
+models/ReportUsageRequest.ts
 models/RoleEnum.ts
 models/Slug.ts
 models/Subscription.ts
+models/SubscriptionDetail.ts
 models/SubscriptionRequest.ts
 models/Team.ts
 models/TeamDetail.ts
@@ -61,4 +66,5 @@ models/TeamDetailRequest.ts
 models/Teammate.ts
 models/Token.ts
 models/TokenRequest.ts
+models/Usage.ts
 models/index.ts

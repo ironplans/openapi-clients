@@ -18,15 +18,27 @@ import {
     PaginatedSubscriptionList,
     PaginatedSubscriptionListFromJSON,
     PaginatedSubscriptionListToJSON,
+    PaginatedUsageList,
+    PaginatedUsageListFromJSON,
+    PaginatedUsageListToJSON,
+    PatchedPlanSwitchRequest,
+    PatchedPlanSwitchRequestFromJSON,
+    PatchedPlanSwitchRequestToJSON,
     PatchedSubscriptionRequest,
     PatchedSubscriptionRequestFromJSON,
     PatchedSubscriptionRequestToJSON,
+    ReportUsageRequest,
+    ReportUsageRequestFromJSON,
+    ReportUsageRequestToJSON,
     Subscription,
     SubscriptionFromJSON,
     SubscriptionToJSON,
     SubscriptionRequest,
     SubscriptionRequestFromJSON,
     SubscriptionRequestToJSON,
+    Usage,
+    UsageFromJSON,
+    UsageToJSON,
 } from '../models';
 
 export interface SubscriptionsV1CreateRequest {
@@ -47,8 +59,19 @@ export interface SubscriptionsV1PartialUpdateRequest {
     patchedSubscriptionRequest?: PatchedSubscriptionRequest;
 }
 
+export interface SubscriptionsV1ReportListRequest {
+    id: string;
+    limit?: number;
+    offset?: number;
+}
+
 export interface SubscriptionsV1RetrieveRequest {
     id: string;
+}
+
+export interface SubscriptionsV1SwitchPartialUpdateRequest {
+    id: string;
+    patchedPlanSwitchRequest?: PatchedPlanSwitchRequest;
 }
 
 export interface SubscriptionsV1UpdateRequest {
@@ -56,8 +79,9 @@ export interface SubscriptionsV1UpdateRequest {
     subscriptionRequest: SubscriptionRequest;
 }
 
-export interface SubscriptionsV1UsageRetrieveRequest {
+export interface SubscriptionsV1UsageCreateRequest {
     id: string;
+    reportUsageRequest: ReportUsageRequest;
 }
 
 /**
@@ -208,6 +232,47 @@ export class SubscriptionsApi extends runtime.BaseAPI {
 
     /**
      */
+    async subscriptionsV1ReportListRaw(requestParameters: SubscriptionsV1ReportListRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PaginatedUsageList>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling subscriptionsV1ReportList.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.limit !== undefined) {
+            queryParameters['limit'] = requestParameters.limit;
+        }
+
+        if (requestParameters.offset !== undefined) {
+            queryParameters['offset'] = requestParameters.offset;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/subscriptions/v1/{id}/report/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaginatedUsageListFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async subscriptionsV1ReportList(requestParameters: SubscriptionsV1ReportListRequest, initOverrides?: RequestInit): Promise<PaginatedUsageList> {
+        const response = await this.subscriptionsV1ReportListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
     async subscriptionsV1RetrieveRaw(requestParameters: SubscriptionsV1RetrieveRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Subscription>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
             throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling subscriptionsV1Retrieve.');
@@ -236,6 +301,42 @@ export class SubscriptionsApi extends runtime.BaseAPI {
      */
     async subscriptionsV1Retrieve(requestParameters: SubscriptionsV1RetrieveRequest, initOverrides?: RequestInit): Promise<Subscription> {
         const response = await this.subscriptionsV1RetrieveRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async subscriptionsV1SwitchPartialUpdateRaw(requestParameters: SubscriptionsV1SwitchPartialUpdateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Subscription>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling subscriptionsV1SwitchPartialUpdate.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/subscriptions/v1/{id}/switch/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedPlanSwitchRequestToJSON(requestParameters.patchedPlanSwitchRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SubscriptionFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async subscriptionsV1SwitchPartialUpdate(requestParameters: SubscriptionsV1SwitchPartialUpdateRequest, initOverrides?: RequestInit): Promise<Subscription> {
+        const response = await this.subscriptionsV1SwitchPartialUpdateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -281,14 +382,20 @@ export class SubscriptionsApi extends runtime.BaseAPI {
 
     /**
      */
-    async subscriptionsV1UsageRetrieveRaw(requestParameters: SubscriptionsV1UsageRetrieveRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Subscription>> {
+    async subscriptionsV1UsageCreateRaw(requestParameters: SubscriptionsV1UsageCreateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Usage>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
-            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling subscriptionsV1UsageRetrieve.');
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling subscriptionsV1UsageCreate.');
+        }
+
+        if (requestParameters.reportUsageRequest === null || requestParameters.reportUsageRequest === undefined) {
+            throw new runtime.RequiredError('reportUsageRequest','Required parameter requestParameters.reportUsageRequest was null or undefined when calling subscriptionsV1UsageCreate.');
         }
 
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.accessToken) {
             // oauth required
@@ -297,18 +404,19 @@ export class SubscriptionsApi extends runtime.BaseAPI {
 
         const response = await this.request({
             path: `/subscriptions/v1/{id}/usage/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
-            method: 'GET',
+            method: 'POST',
             headers: headerParameters,
             query: queryParameters,
+            body: ReportUsageRequestToJSON(requestParameters.reportUsageRequest),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => SubscriptionFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => UsageFromJSON(jsonValue));
     }
 
     /**
      */
-    async subscriptionsV1UsageRetrieve(requestParameters: SubscriptionsV1UsageRetrieveRequest, initOverrides?: RequestInit): Promise<Subscription> {
-        const response = await this.subscriptionsV1UsageRetrieveRaw(requestParameters, initOverrides);
+    async subscriptionsV1UsageCreate(requestParameters: SubscriptionsV1UsageCreateRequest, initOverrides?: RequestInit): Promise<Usage> {
+        const response = await this.subscriptionsV1UsageCreateRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

@@ -48,7 +48,7 @@ export interface Subscription {
      * @type {Date}
      * @memberof Subscription
      */
-    readonly endAt: Date | null;
+    readonly endAt: Date;
     /**
      * 
      * @type {boolean}
@@ -57,10 +57,10 @@ export interface Subscription {
     isPaused?: boolean;
     /**
      * 
-     * @type {boolean}
+     * @type {string}
      * @memberof Subscription
      */
-    isActive?: boolean;
+    readonly isActive: string;
 }
 
 export function SubscriptionFromJSON(json: any): Subscription {
@@ -77,9 +77,9 @@ export function SubscriptionFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'planId': json['plan_id'],
         'teamId': json['team_id'],
         'startAt': (new Date(json['start_at'])),
-        'endAt': (json['end_at'] === null ? null : new Date(json['end_at'])),
+        'endAt': (new Date(json['end_at'])),
         'isPaused': !exists(json, 'is_paused') ? undefined : json['is_paused'],
-        'isActive': !exists(json, 'is_active') ? undefined : json['is_active'],
+        'isActive': json['is_active'],
     };
 }
 
@@ -95,7 +95,6 @@ export function SubscriptionToJSON(value?: Subscription | null): any {
         'plan_id': value.planId,
         'team_id': value.teamId,
         'is_paused': value.isPaused,
-        'is_active': value.isActive,
     };
 }
 

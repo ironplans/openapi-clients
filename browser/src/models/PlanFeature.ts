@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    Feature,
+    FeatureFromJSON,
+    FeatureFromJSONTyped,
+    FeatureToJSON,
+} from './';
+
 /**
  * 
  * @export
@@ -39,10 +46,22 @@ export interface PlanFeature {
     display?: string;
     /**
      * 
+     * @type {string}
+     * @memberof PlanFeature
+     */
+    slug?: string;
+    /**
+     * 
      * @type {number}
      * @memberof PlanFeature
      */
     maxLimit?: number;
+    /**
+     * 
+     * @type {Feature}
+     * @memberof PlanFeature
+     */
+    readonly feature: Feature;
 }
 
 export function PlanFeatureFromJSON(json: any): PlanFeature {
@@ -58,7 +77,9 @@ export function PlanFeatureFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'featureId': json['feature_id'],
         'specId': !exists(json, 'spec_id') ? undefined : json['spec_id'],
         'display': !exists(json, 'display') ? undefined : json['display'],
+        'slug': !exists(json, 'slug') ? undefined : json['slug'],
         'maxLimit': !exists(json, 'max_limit') ? undefined : json['max_limit'],
+        'feature': FeatureFromJSON(json['feature']),
     };
 }
 
@@ -74,6 +95,7 @@ export function PlanFeatureToJSON(value?: PlanFeature | null): any {
         'feature_id': value.featureId,
         'spec_id': value.specId,
         'display': value.display,
+        'slug': value.slug,
         'max_limit': value.maxLimit,
     };
 }
