@@ -23,46 +23,32 @@ import {
 /**
  * 
  * @export
- * @interface Teammate
+ * @interface TeammateRequest
  */
-export interface Teammate {
-    /**
-     * 
-     * @type {string}
-     * @memberof Teammate
-     */
-    readonly id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Teammate
-     */
-    readonly customerId: string;
+export interface TeammateRequest {
     /**
      * 
      * @type {RoleEnum}
-     * @memberof Teammate
+     * @memberof TeammateRequest
      */
     role: RoleEnum;
 }
 
-export function TeammateFromJSON(json: any): Teammate {
-    return TeammateFromJSONTyped(json, false);
+export function TeammateRequestFromJSON(json: any): TeammateRequest {
+    return TeammateRequestFromJSONTyped(json, false);
 }
 
-export function TeammateFromJSONTyped(json: any, ignoreDiscriminator: boolean): Teammate {
+export function TeammateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): TeammateRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': json['id'],
-        'customerId': json['customer_id'],
         'role': RoleEnumFromJSON(json['role']),
     };
 }
 
-export function TeammateToJSON(value?: Teammate | null): any {
+export function TeammateRequestToJSON(value?: TeammateRequest | null): any {
     if (value === undefined) {
         return undefined;
     }

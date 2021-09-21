@@ -64,6 +64,7 @@ models/Team.ts
 models/TeamDetail.ts
 models/TeamDetailRequest.ts
 models/Teammate.ts
+models/TeammateRequest.ts
 models/Token.ts
 models/TokenRequest.ts
 models/Usage.ts

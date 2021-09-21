@@ -31,24 +31,6 @@ export interface PlanFeatureRequest {
      * @memberof PlanFeatureRequest
      */
     specId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlanFeatureRequest
-     */
-    display?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlanFeatureRequest
-     */
-    slug?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlanFeatureRequest
-     */
-    maxLimit?: number;
 }
 
 export function PlanFeatureRequestFromJSON(json: any): PlanFeatureRequest {
@@ -63,9 +45,6 @@ export function PlanFeatureRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         
         'featureId': json['feature_id'],
         'specId': !exists(json, 'spec_id') ? undefined : json['spec_id'],
-        'display': !exists(json, 'display') ? undefined : json['display'],
-        'slug': !exists(json, 'slug') ? undefined : json['slug'],
-        'maxLimit': !exists(json, 'max_limit') ? undefined : json['max_limit'],
     };
 }
 
@@ -80,9 +59,6 @@ export function PlanFeatureRequestToJSON(value?: PlanFeatureRequest | null): any
         
         'feature_id': value.featureId,
         'spec_id': value.specId,
-        'display': value.display,
-        'slug': value.slug,
-        'max_limit': value.maxLimit,
     };
 }
 

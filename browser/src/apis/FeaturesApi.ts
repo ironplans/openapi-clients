@@ -40,6 +40,7 @@ export interface FeaturesV1DestroyRequest {
 export interface FeaturesV1ListRequest {
     limit?: number;
     offset?: number;
+    slug?: string;
 }
 
 export interface FeaturesV1PartialUpdateRequest {
@@ -136,6 +137,10 @@ export class FeaturesApi extends runtime.BaseAPI {
 
         if (requestParameters.offset !== undefined) {
             queryParameters['offset'] = requestParameters.offset;
+        }
+
+        if (requestParameters.slug !== undefined) {
+            queryParameters['slug'] = requestParameters.slug;
         }
 
         const headerParameters: runtime.HTTPHeaders = {};

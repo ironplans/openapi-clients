@@ -49,6 +49,12 @@ export interface PatchedPlanRequest {
      * @type {boolean}
      * @memberof PatchedPlanRequest
      */
+    isActive?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PatchedPlanRequest
+     */
     isPublic?: boolean;
     /**
      * 
@@ -89,6 +95,7 @@ export function PatchedPlanRequestFromJSONTyped(json: any, ignoreDiscriminator: 
         'providerId': !exists(json, 'provider_id') ? undefined : json['provider_id'],
         'name': !exists(json, 'name') ? undefined : json['name'],
         'tier': !exists(json, 'tier') ? undefined : json['tier'],
+        'isActive': !exists(json, 'is_active') ? undefined : json['is_active'],
         'isPublic': !exists(json, 'is_public') ? undefined : json['is_public'],
         'isTrialAllowed': !exists(json, 'is_trial_allowed') ? undefined : json['is_trial_allowed'],
         'perYearPriceCents': !exists(json, 'per_year_price_cents') ? undefined : json['per_year_price_cents'],
@@ -109,6 +116,7 @@ export function PatchedPlanRequestToJSON(value?: PatchedPlanRequest | null): any
         'provider_id': value.providerId,
         'name': value.name,
         'tier': value.tier,
+        'is_active': value.isActive,
         'is_public': value.isPublic,
         'is_trial_allowed': value.isTrialAllowed,
         'per_year_price_cents': value.perYearPriceCents,

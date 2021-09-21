@@ -13,6 +13,17 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    AggregationEnum,
+    AggregationEnumFromJSON,
+    AggregationEnumFromJSONTyped,
+    AggregationEnumToJSON,
+    RecordPeriodEnum,
+    RecordPeriodEnumFromJSON,
+    RecordPeriodEnumFromJSONTyped,
+    RecordPeriodEnumToJSON,
+} from './';
+
 /**
  * 
  * @export
@@ -27,10 +38,28 @@ export interface FeatureSpecRequest {
     name: string;
     /**
      * 
+     * @type {RecordPeriodEnum}
+     * @memberof FeatureSpecRequest
+     */
+    recordPeriod?: RecordPeriodEnum;
+    /**
+     * 
+     * @type {AggregationEnum}
+     * @memberof FeatureSpecRequest
+     */
+    aggregation?: AggregationEnum;
+    /**
+     * 
      * @type {number}
      * @memberof FeatureSpecRequest
      */
     maxLimit?: number | null;
+    /**
+     * Amount in cents
+     * @type {number}
+     * @memberof FeatureSpecRequest
+     */
+    unitPrice?: number | null;
     /**
      * 
      * @type {string}
@@ -50,7 +79,10 @@ export function FeatureSpecRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'name': json['name'],
+        'recordPeriod': !exists(json, 'record_period') ? undefined : RecordPeriodEnumFromJSON(json['record_period']),
+        'aggregation': !exists(json, 'aggregation') ? undefined : AggregationEnumFromJSON(json['aggregation']),
         'maxLimit': !exists(json, 'max_limit') ? undefined : json['max_limit'],
+        'unitPrice': !exists(json, 'unit_price') ? undefined : json['unit_price'],
         'providerId': !exists(json, 'provider_id') ? undefined : json['provider_id'],
     };
 }
@@ -65,7 +97,10 @@ export function FeatureSpecRequestToJSON(value?: FeatureSpecRequest | null): any
     return {
         
         'name': value.name,
+        'record_period': RecordPeriodEnumToJSON(value.recordPeriod),
+        'aggregation': AggregationEnumToJSON(value.aggregation),
         'max_limit': value.maxLimit,
+        'unit_price': value.unitPrice,
         'provider_id': value.providerId,
     };
 }

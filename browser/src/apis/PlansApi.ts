@@ -38,6 +38,9 @@ export interface PlansV1DestroyRequest {
 }
 
 export interface PlansV1ListRequest {
+    isActive?: boolean;
+    isPublic?: boolean;
+    isTrialAllowed?: boolean;
     limit?: number;
     offset?: number;
 }
@@ -133,6 +136,18 @@ export class PlansApi extends runtime.BaseAPI {
      */
     async plansV1ListRaw(requestParameters: PlansV1ListRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PaginatedPlanList>> {
         const queryParameters: any = {};
+
+        if (requestParameters.isActive !== undefined) {
+            queryParameters['is_active'] = requestParameters.isActive;
+        }
+
+        if (requestParameters.isPublic !== undefined) {
+            queryParameters['is_public'] = requestParameters.isPublic;
+        }
+
+        if (requestParameters.isTrialAllowed !== undefined) {
+            queryParameters['is_trial_allowed'] = requestParameters.isTrialAllowed;
+        }
 
         if (requestParameters.limit !== undefined) {
             queryParameters['limit'] = requestParameters.limit;

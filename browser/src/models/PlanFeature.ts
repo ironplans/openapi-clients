@@ -18,6 +18,10 @@ import {
     FeatureFromJSON,
     FeatureFromJSONTyped,
     FeatureToJSON,
+    FeatureSpec,
+    FeatureSpecFromJSON,
+    FeatureSpecFromJSONTyped,
+    FeatureSpecToJSON,
 } from './';
 
 /**
@@ -31,37 +35,37 @@ export interface PlanFeature {
      * @type {string}
      * @memberof PlanFeature
      */
-    featureId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlanFeature
-     */
-    specId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlanFeature
-     */
-    display?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PlanFeature
-     */
-    slug?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PlanFeature
-     */
-    maxLimit?: number;
+    readonly id: string;
     /**
      * 
      * @type {Feature}
      * @memberof PlanFeature
      */
     readonly feature: Feature;
+    /**
+     * 
+     * @type {FeatureSpec}
+     * @memberof PlanFeature
+     */
+    readonly spec: FeatureSpec;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanFeature
+     */
+    readonly display: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanFeature
+     */
+    readonly slug: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PlanFeature
+     */
+    readonly maxLimit: number;
 }
 
 export function PlanFeatureFromJSON(json: any): PlanFeature {
@@ -74,12 +78,12 @@ export function PlanFeatureFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'featureId': json['feature_id'],
-        'specId': !exists(json, 'spec_id') ? undefined : json['spec_id'],
-        'display': !exists(json, 'display') ? undefined : json['display'],
-        'slug': !exists(json, 'slug') ? undefined : json['slug'],
-        'maxLimit': !exists(json, 'max_limit') ? undefined : json['max_limit'],
+        'id': json['id'],
         'feature': FeatureFromJSON(json['feature']),
+        'spec': FeatureSpecFromJSON(json['spec']),
+        'display': json['display'],
+        'slug': json['slug'],
+        'maxLimit': json['max_limit'],
     };
 }
 
@@ -92,11 +96,6 @@ export function PlanFeatureToJSON(value?: PlanFeature | null): any {
     }
     return {
         
-        'feature_id': value.featureId,
-        'spec_id': value.specId,
-        'display': value.display,
-        'slug': value.slug,
-        'max_limit': value.maxLimit,
     };
 }
 

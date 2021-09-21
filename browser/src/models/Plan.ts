@@ -55,13 +55,19 @@ export interface Plan {
      * @type {boolean}
      * @memberof Plan
      */
-    isPublic?: boolean;
+    isActive: boolean;
     /**
      * 
      * @type {boolean}
      * @memberof Plan
      */
-    isTrialAllowed?: boolean;
+    isPublic: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Plan
+     */
+    isTrialAllowed: boolean;
     /**
      * Amount in cents
      * @type {number}
@@ -96,8 +102,9 @@ export function PlanFromJSONTyped(json: any, ignoreDiscriminator: boolean): Plan
         'providerId': !exists(json, 'provider_id') ? undefined : json['provider_id'],
         'name': json['name'],
         'tier': !exists(json, 'tier') ? undefined : json['tier'],
-        'isPublic': !exists(json, 'is_public') ? undefined : json['is_public'],
-        'isTrialAllowed': !exists(json, 'is_trial_allowed') ? undefined : json['is_trial_allowed'],
+        'isActive': json['is_active'],
+        'isPublic': json['is_public'],
+        'isTrialAllowed': json['is_trial_allowed'],
         'perYearPriceCents': !exists(json, 'per_year_price_cents') ? undefined : json['per_year_price_cents'],
         'perMonthPriceCents': !exists(json, 'per_month_price_cents') ? undefined : json['per_month_price_cents'],
         'features': ((json['features'] as Array<any>).map(PlanFeatureFromJSON)),
@@ -116,6 +123,7 @@ export function PlanToJSON(value?: Plan | null): any {
         'provider_id': value.providerId,
         'name': value.name,
         'tier': value.tier,
+        'is_active': value.isActive,
         'is_public': value.isPublic,
         'is_trial_allowed': value.isTrialAllowed,
         'per_year_price_cents': value.perYearPriceCents,

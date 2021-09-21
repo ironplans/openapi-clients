@@ -53,6 +53,7 @@ export * from './Team';
 export * from './TeamDetail';
 export * from './TeamDetailRequest';
 export * from './Teammate';
+export * from './TeammateRequest';
 export * from './Token';
 export * from './TokenRequest';
 export * from './Usage';

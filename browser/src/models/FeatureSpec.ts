@@ -47,19 +47,25 @@ export interface FeatureSpec {
      * @type {RecordPeriodEnum}
      * @memberof FeatureSpec
      */
-    readonly recordPeriod: RecordPeriodEnum;
+    recordPeriod?: RecordPeriodEnum;
     /**
      * 
      * @type {AggregationEnum}
      * @memberof FeatureSpec
      */
-    readonly aggregation: AggregationEnum;
+    aggregation?: AggregationEnum;
     /**
      * 
      * @type {number}
      * @memberof FeatureSpec
      */
     maxLimit?: number | null;
+    /**
+     * Amount in cents
+     * @type {number}
+     * @memberof FeatureSpec
+     */
+    unitPrice?: number | null;
     /**
      * 
      * @type {string}
@@ -80,9 +86,10 @@ export function FeatureSpecFromJSONTyped(json: any, ignoreDiscriminator: boolean
         
         'id': json['id'],
         'name': json['name'],
-        'recordPeriod': RecordPeriodEnumFromJSON(json['record_period']),
-        'aggregation': AggregationEnumFromJSON(json['aggregation']),
+        'recordPeriod': !exists(json, 'record_period') ? undefined : RecordPeriodEnumFromJSON(json['record_period']),
+        'aggregation': !exists(json, 'aggregation') ? undefined : AggregationEnumFromJSON(json['aggregation']),
         'maxLimit': !exists(json, 'max_limit') ? undefined : json['max_limit'],
+        'unitPrice': !exists(json, 'unit_price') ? undefined : json['unit_price'],
         'providerId': !exists(json, 'provider_id') ? undefined : json['provider_id'],
     };
 }
@@ -97,7 +104,10 @@ export function FeatureSpecToJSON(value?: FeatureSpec | null): any {
     return {
         
         'name': value.name,
+        'record_period': RecordPeriodEnumToJSON(value.recordPeriod),
+        'aggregation': AggregationEnumToJSON(value.aggregation),
         'max_limit': value.maxLimit,
+        'unit_price': value.unitPrice,
         'provider_id': value.providerId,
     };
 }
