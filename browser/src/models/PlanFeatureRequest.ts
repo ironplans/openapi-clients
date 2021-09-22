@@ -24,13 +24,25 @@ export interface PlanFeatureRequest {
      * @type {string}
      * @memberof PlanFeatureRequest
      */
-    featureId: string;
+    id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PlanFeatureRequest
+     */
+    featureId?: string;
     /**
      * 
      * @type {string}
      * @memberof PlanFeatureRequest
      */
     specId?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PlanFeatureRequest
+     */
+    isActive?: boolean;
 }
 
 export function PlanFeatureRequestFromJSON(json: any): PlanFeatureRequest {
@@ -43,8 +55,10 @@ export function PlanFeatureRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     }
     return {
         
-        'featureId': json['feature_id'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'featureId': !exists(json, 'feature_id') ? undefined : json['feature_id'],
         'specId': !exists(json, 'spec_id') ? undefined : json['spec_id'],
+        'isActive': !exists(json, 'is_active') ? undefined : json['is_active'],
     };
 }
 
@@ -57,8 +71,10 @@ export function PlanFeatureRequestToJSON(value?: PlanFeatureRequest | null): any
     }
     return {
         
+        'id': value.id,
         'feature_id': value.featureId,
         'spec_id': value.specId,
+        'is_active': value.isActive,
     };
 }
 

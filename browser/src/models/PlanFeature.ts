@@ -35,7 +35,13 @@ export interface PlanFeature {
      * @type {string}
      * @memberof PlanFeature
      */
-    readonly id: string;
+    id?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof PlanFeature
+     */
+    isActive?: boolean;
     /**
      * 
      * @type {Feature}
@@ -78,7 +84,8 @@ export function PlanFeatureFromJSONTyped(json: any, ignoreDiscriminator: boolean
     }
     return {
         
-        'id': json['id'],
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'isActive': !exists(json, 'is_active') ? undefined : json['is_active'],
         'feature': FeatureFromJSON(json['feature']),
         'spec': FeatureSpecFromJSON(json['spec']),
         'display': json['display'],
@@ -96,6 +103,8 @@ export function PlanFeatureToJSON(value?: PlanFeature | null): any {
     }
     return {
         
+        'id': value.id,
+        'is_active': value.isActive,
     };
 }
 

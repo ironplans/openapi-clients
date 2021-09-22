@@ -65,6 +65,7 @@ export interface PlansV1UpdateRequest {
 export class PlansApi extends runtime.BaseAPI {
 
     /**
+     * Add a feature and optionally specification to a plan by specifying a `feature_id` and `spec_id` in the list of features.
      */
     async plansV1CreateRaw(requestParameters: PlansV1CreateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Plan>> {
         if (requestParameters.planRequest === null || requestParameters.planRequest === undefined) {
@@ -94,6 +95,7 @@ export class PlansApi extends runtime.BaseAPI {
     }
 
     /**
+     * Add a feature and optionally specification to a plan by specifying a `feature_id` and `spec_id` in the list of features.
      */
     async plansV1Create(requestParameters: PlansV1CreateRequest, initOverrides?: RequestInit): Promise<Plan> {
         const response = await this.plansV1CreateRaw(requestParameters, initOverrides);
@@ -251,6 +253,7 @@ export class PlansApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a feature and spec from a plan by specifying `id` and `is_active: false` in the plan feature list in an update operation.  An empty list for PUT or PATCH does nothing.  A PlanFeature cannot change which feature or spec once created. A deactivated PlanFeature can be reactivated by setting `is_active: true`
      */
     async plansV1UpdateRaw(requestParameters: PlansV1UpdateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Plan>> {
         if (requestParameters.id === null || requestParameters.id === undefined) {
@@ -284,6 +287,7 @@ export class PlansApi extends runtime.BaseAPI {
     }
 
     /**
+     * Remove a feature and spec from a plan by specifying `id` and `is_active: false` in the plan feature list in an update operation.  An empty list for PUT or PATCH does nothing.  A PlanFeature cannot change which feature or spec once created. A deactivated PlanFeature can be reactivated by setting `is_active: true`
      */
     async plansV1Update(requestParameters: PlansV1UpdateRequest, initOverrides?: RequestInit): Promise<Plan> {
         const response = await this.plansV1UpdateRaw(requestParameters, initOverrides);
