@@ -23,34 +23,34 @@ import {
 /**
  * 
  * @export
- * @interface CreateInviteRequest
+ * @interface BulkCreateInviteRequest
  */
-export interface CreateInviteRequest {
+export interface BulkCreateInviteRequest {
     /**
      * 
      * @type {string}
-     * @memberof CreateInviteRequest
+     * @memberof BulkCreateInviteRequest
      */
     teamId: string;
     /**
      * 
      * @type {RoleEnum}
-     * @memberof CreateInviteRequest
+     * @memberof BulkCreateInviteRequest
      */
     role?: RoleEnum;
     /**
      * 
-     * @type {string}
-     * @memberof CreateInviteRequest
+     * @type {Array<string>}
+     * @memberof BulkCreateInviteRequest
      */
-    toEmail: string;
+    toEmails: Array<string>;
 }
 
-export function CreateInviteRequestFromJSON(json: any): CreateInviteRequest {
-    return CreateInviteRequestFromJSONTyped(json, false);
+export function BulkCreateInviteRequestFromJSON(json: any): BulkCreateInviteRequest {
+    return BulkCreateInviteRequestFromJSONTyped(json, false);
 }
 
-export function CreateInviteRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateInviteRequest {
+export function BulkCreateInviteRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): BulkCreateInviteRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -58,11 +58,11 @@ export function CreateInviteRequestFromJSONTyped(json: any, ignoreDiscriminator:
         
         'teamId': json['team_id'],
         'role': !exists(json, 'role') ? undefined : RoleEnumFromJSON(json['role']),
-        'toEmail': json['to_email'],
+        'toEmails': json['to_emails'],
     };
 }
 
-export function CreateInviteRequestToJSON(value?: CreateInviteRequest | null): any {
+export function BulkCreateInviteRequestToJSON(value?: BulkCreateInviteRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -73,7 +73,7 @@ export function CreateInviteRequestToJSON(value?: CreateInviteRequest | null): a
         
         'team_id': value.teamId,
         'role': RoleEnumToJSON(value.role),
-        'to_email': value.toEmail,
+        'to_emails': value.toEmails,
     };
 }
 

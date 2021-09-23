@@ -18,6 +18,10 @@ import {
     PlanFeatureRequestFromJSON,
     PlanFeatureRequestFromJSONTyped,
     PlanFeatureRequestToJSON,
+    TeamAccessRequest,
+    TeamAccessRequestFromJSON,
+    TeamAccessRequestFromJSONTyped,
+    TeamAccessRequestToJSON,
 } from './';
 
 /**
@@ -80,6 +84,12 @@ export interface PlanRequest {
      * @memberof PlanRequest
      */
     features: Array<PlanFeatureRequest>;
+    /**
+     * 
+     * @type {Array<TeamAccessRequest>}
+     * @memberof PlanRequest
+     */
+    teamsAccess: Array<TeamAccessRequest>;
 }
 
 export function PlanRequestFromJSON(json: any): PlanRequest {
@@ -101,6 +111,7 @@ export function PlanRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'perYearPriceCents': !exists(json, 'per_year_price_cents') ? undefined : json['per_year_price_cents'],
         'perMonthPriceCents': !exists(json, 'per_month_price_cents') ? undefined : json['per_month_price_cents'],
         'features': ((json['features'] as Array<any>).map(PlanFeatureRequestFromJSON)),
+        'teamsAccess': ((json['teams_access'] as Array<any>).map(TeamAccessRequestFromJSON)),
     };
 }
 
@@ -122,6 +133,7 @@ export function PlanRequestToJSON(value?: PlanRequest | null): any {
         'per_year_price_cents': value.perYearPriceCents,
         'per_month_price_cents': value.perMonthPriceCents,
         'features': ((value.features as Array<any>).map(PlanFeatureRequestToJSON)),
+        'teams_access': ((value.teamsAccess as Array<any>).map(TeamAccessRequestToJSON)),
     };
 }
 

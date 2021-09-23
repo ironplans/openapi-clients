@@ -13,6 +13,13 @@
  */
 
 import { exists, mapValues } from '../runtime';
+import {
+    RoleEnum,
+    RoleEnumFromJSON,
+    RoleEnumFromJSONTyped,
+    RoleEnumToJSON,
+} from './';
+
 /**
  * 
  * @export
@@ -37,6 +44,12 @@ export interface InviteRequest {
      * @memberof InviteRequest
      */
     expiresAt?: Date;
+    /**
+     * 
+     * @type {RoleEnum}
+     * @memberof InviteRequest
+     */
+    role?: RoleEnum;
 }
 
 export function InviteRequestFromJSON(json: any): InviteRequest {
@@ -52,6 +65,7 @@ export function InviteRequestFromJSONTyped(json: any, ignoreDiscriminator: boole
         'sentToEmail': json['sent_to_email'],
         'isClaimed': !exists(json, 'is_claimed') ? undefined : json['is_claimed'],
         'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
+        'role': !exists(json, 'role') ? undefined : RoleEnumFromJSON(json['role']),
     };
 }
 
@@ -67,6 +81,7 @@ export function InviteRequestToJSON(value?: InviteRequest | null): any {
         'sent_to_email': value.sentToEmail,
         'is_claimed': value.isClaimed,
         'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
+        'role': RoleEnumToJSON(value.role),
     };
 }
 

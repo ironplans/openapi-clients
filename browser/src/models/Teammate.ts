@@ -44,6 +44,12 @@ export interface Teammate {
      * @memberof Teammate
      */
     role: RoleEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Teammate
+     */
+    readonly email: string;
 }
 
 export function TeammateFromJSON(json: any): Teammate {
@@ -59,6 +65,7 @@ export function TeammateFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'id': json['id'],
         'customerId': json['customer_id'],
         'role': RoleEnumFromJSON(json['role']),
+        'email': json['email'],
     };
 }
 

@@ -18,6 +18,10 @@ import {
     PlanFeatureFromJSON,
     PlanFeatureFromJSONTyped,
     PlanFeatureToJSON,
+    TeamAccess,
+    TeamAccessFromJSON,
+    TeamAccessFromJSONTyped,
+    TeamAccessToJSON,
 } from './';
 
 /**
@@ -86,6 +90,12 @@ export interface Plan {
      * @memberof Plan
      */
     features: Array<PlanFeature>;
+    /**
+     * 
+     * @type {Array<TeamAccess>}
+     * @memberof Plan
+     */
+    teamsAccess: Array<TeamAccess>;
 }
 
 export function PlanFromJSON(json: any): Plan {
@@ -108,6 +118,7 @@ export function PlanFromJSONTyped(json: any, ignoreDiscriminator: boolean): Plan
         'perYearPriceCents': !exists(json, 'per_year_price_cents') ? undefined : json['per_year_price_cents'],
         'perMonthPriceCents': !exists(json, 'per_month_price_cents') ? undefined : json['per_month_price_cents'],
         'features': ((json['features'] as Array<any>).map(PlanFeatureFromJSON)),
+        'teamsAccess': ((json['teams_access'] as Array<any>).map(TeamAccessFromJSON)),
     };
 }
 
@@ -129,6 +140,7 @@ export function PlanToJSON(value?: Plan | null): any {
         'per_year_price_cents': value.perYearPriceCents,
         'per_month_price_cents': value.perMonthPriceCents,
         'features': ((value.features as Array<any>).map(PlanFeatureToJSON)),
+        'teams_access': ((value.teamsAccess as Array<any>).map(TeamAccessToJSON)),
     };
 }
 

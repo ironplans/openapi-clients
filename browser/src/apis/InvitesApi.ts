@@ -15,10 +15,17 @@
 
 import * as runtime from '../runtime';
 import {
+    BulkCreateInviteRequest,
+    BulkCreateInviteRequestFromJSON,
+    BulkCreateInviteRequestToJSON,
     CreateInviteRequest,
     CreateInviteRequestFromJSON,
     CreateInviteRequestToJSON,
 } from '../models';
+
+export interface InvitesV1BulkCreateRequest {
+    bulkCreateInviteRequest: BulkCreateInviteRequest;
+}
 
 export interface InvitesV1ClaimRetrieveRequest {
     token: string;
@@ -32,6 +39,43 @@ export interface InvitesV1CreateRequest {
  * 
  */
 export class InvitesApi extends runtime.BaseAPI {
+
+    /**
+     * Send multiple invitations via email.
+     */
+    async invitesV1BulkCreateRaw(requestParameters: InvitesV1BulkCreateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.bulkCreateInviteRequest === null || requestParameters.bulkCreateInviteRequest === undefined) {
+            throw new runtime.RequiredError('bulkCreateInviteRequest','Required parameter requestParameters.bulkCreateInviteRequest was null or undefined when calling invitesV1BulkCreate.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/invites/v1/bulk/`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: BulkCreateInviteRequestToJSON(requestParameters.bulkCreateInviteRequest),
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Send multiple invitations via email.
+     */
+    async invitesV1BulkCreate(requestParameters: InvitesV1BulkCreateRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.invitesV1BulkCreateRaw(requestParameters, initOverrides);
+    }
 
     /**
      * Claim an invite and be redirected to provider\'s auth url.

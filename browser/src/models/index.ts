@@ -2,6 +2,7 @@
 /* eslint-disable */
 export * from './Account';
 export * from './AggregationEnum';
+export * from './BulkCreateInviteRequest';
 export * from './CreateInviteRequest';
 export * from './Customer';
 export * from './CustomerPaymentIntentRequest';
@@ -50,6 +51,8 @@ export * from './Subscription';
 export * from './SubscriptionDetail';
 export * from './SubscriptionRequest';
 export * from './Team';
+export * from './TeamAccess';
+export * from './TeamAccessRequest';
 export * from './TeamDetail';
 export * from './TeamDetailRequest';
 export * from './Teammate';

@@ -18,6 +18,10 @@ import {
     PublicProfileFromJSON,
     PublicProfileFromJSONTyped,
     PublicProfileToJSON,
+    RoleEnum,
+    RoleEnumFromJSON,
+    RoleEnumFromJSONTyped,
+    RoleEnumToJSON,
 } from './';
 
 /**
@@ -62,6 +66,12 @@ export interface Invite {
      * @memberof Invite
      */
     readonly createdAt: Date;
+    /**
+     * 
+     * @type {RoleEnum}
+     * @memberof Invite
+     */
+    role?: RoleEnum;
 }
 
 export function InviteFromJSON(json: any): Invite {
@@ -80,6 +90,7 @@ export function InviteFromJSONTyped(json: any, ignoreDiscriminator: boolean): In
         'isClaimed': !exists(json, 'is_claimed') ? undefined : json['is_claimed'],
         'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
         'createdAt': (new Date(json['created_at'])),
+        'role': !exists(json, 'role') ? undefined : RoleEnumFromJSON(json['role']),
     };
 }
 
@@ -95,6 +106,7 @@ export function InviteToJSON(value?: Invite | null): any {
         'sent_to_email': value.sentToEmail,
         'is_claimed': value.isClaimed,
         'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
+        'role': RoleEnumToJSON(value.role),
     };
 }
 

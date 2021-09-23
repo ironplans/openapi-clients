@@ -13,56 +13,49 @@
  */
 
 import { exists, mapValues } from '../runtime';
-import {
-    RoleEnum,
-    RoleEnumFromJSON,
-    RoleEnumFromJSONTyped,
-    RoleEnumToJSON,
-} from './';
-
 /**
  * 
  * @export
- * @interface CreateInviteRequest
+ * @interface TeamAccess
  */
-export interface CreateInviteRequest {
+export interface TeamAccess {
     /**
      * 
      * @type {string}
-     * @memberof CreateInviteRequest
+     * @memberof TeamAccess
+     */
+    id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof TeamAccess
      */
     teamId: string;
     /**
      * 
-     * @type {RoleEnum}
-     * @memberof CreateInviteRequest
-     */
-    role?: RoleEnum;
-    /**
-     * 
      * @type {string}
-     * @memberof CreateInviteRequest
+     * @memberof TeamAccess
      */
-    toEmail: string;
+    name?: string;
 }
 
-export function CreateInviteRequestFromJSON(json: any): CreateInviteRequest {
-    return CreateInviteRequestFromJSONTyped(json, false);
+export function TeamAccessFromJSON(json: any): TeamAccess {
+    return TeamAccessFromJSONTyped(json, false);
 }
 
-export function CreateInviteRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateInviteRequest {
+export function TeamAccessFromJSONTyped(json: any, ignoreDiscriminator: boolean): TeamAccess {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
+        'id': !exists(json, 'id') ? undefined : json['id'],
         'teamId': json['team_id'],
-        'role': !exists(json, 'role') ? undefined : RoleEnumFromJSON(json['role']),
-        'toEmail': json['to_email'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
     };
 }
 
-export function CreateInviteRequestToJSON(value?: CreateInviteRequest | null): any {
+export function TeamAccessToJSON(value?: TeamAccess | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -71,9 +64,9 @@ export function CreateInviteRequestToJSON(value?: CreateInviteRequest | null): a
     }
     return {
         
+        'id': value.id,
         'team_id': value.teamId,
-        'role': RoleEnumToJSON(value.role),
-        'to_email': value.toEmail,
+        'name': value.name,
     };
 }
 

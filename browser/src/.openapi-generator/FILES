@@ -13,6 +13,7 @@ apis/index.ts
 index.ts
 models/Account.ts
 models/AggregationEnum.ts
+models/BulkCreateInviteRequest.ts
 models/CreateInviteRequest.ts
 models/Customer.ts
 models/CustomerPaymentIntentRequest.ts
@@ -61,6 +62,8 @@ models/Subscription.ts
 models/SubscriptionDetail.ts
 models/SubscriptionRequest.ts
 models/Team.ts
+models/TeamAccess.ts
+models/TeamAccessRequest.ts
 models/TeamDetail.ts
 models/TeamDetailRequest.ts
 models/Teammate.ts
