@@ -5,6 +5,7 @@
   "description": "OpenAPI client for Iron Plans API",
   "author": "OpenAPI-Generator",
   "main": "./dist/index.js",
+  "module": "./dist/api.esm.js",
   "typings": "./dist/index.d.ts",
   "files": [
     "dist/*",
@@ -31,5 +32,15 @@
     "semi": false,
     "trailingComma": "all"
   },
+  "size-limit": [
+    {
+      "path": "dist/api.cjs.production.min.js",
+      "limit": "15 KB"
+    },
+    {
+      "path": "dist/api.esm.js",
+      "limit": "15 KB"
+    }
+  ],
   "dependencies": {}
 }
