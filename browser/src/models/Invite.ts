@@ -72,6 +72,12 @@ export interface Invite {
      * @memberof Invite
      */
     role?: RoleEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof Invite
+     */
+    teamId: string;
 }
 
 export function InviteFromJSON(json: any): Invite {
@@ -91,6 +97,7 @@ export function InviteFromJSONTyped(json: any, ignoreDiscriminator: boolean): In
         'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
         'createdAt': (new Date(json['created_at'])),
         'role': !exists(json, 'role') ? undefined : RoleEnumFromJSON(json['role']),
+        'teamId': json['team_id'],
     };
 }
 
@@ -107,6 +114,7 @@ export function InviteToJSON(value?: Invite | null): any {
         'is_claimed': value.isClaimed,
         'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
         'role': RoleEnumToJSON(value.role),
+        'team_id': value.teamId,
     };
 }
 

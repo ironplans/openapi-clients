@@ -23,46 +23,32 @@ import {
 /**
  * 
  * @export
- * @interface CreateInviteRequest
+ * @interface PatchedTeammateRequest
  */
-export interface CreateInviteRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateInviteRequest
-     */
-    teamId: string;
+export interface PatchedTeammateRequest {
     /**
      * 
      * @type {RoleEnum}
-     * @memberof CreateInviteRequest
+     * @memberof PatchedTeammateRequest
      */
     role?: RoleEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateInviteRequest
-     */
-    toEmail: string;
 }
 
-export function CreateInviteRequestFromJSON(json: any): CreateInviteRequest {
-    return CreateInviteRequestFromJSONTyped(json, false);
+export function PatchedTeammateRequestFromJSON(json: any): PatchedTeammateRequest {
+    return PatchedTeammateRequestFromJSONTyped(json, false);
 }
 
-export function CreateInviteRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateInviteRequest {
+export function PatchedTeammateRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedTeammateRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'teamId': json['team_id'],
         'role': !exists(json, 'role') ? undefined : RoleEnumFromJSON(json['role']),
-        'toEmail': json['to_email'],
     };
 }
 
-export function CreateInviteRequestToJSON(value?: CreateInviteRequest | null): any {
+export function PatchedTeammateRequestToJSON(value?: PatchedTeammateRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -71,9 +57,7 @@ export function CreateInviteRequestToJSON(value?: CreateInviteRequest | null): a
     }
     return {
         
-        'team_id': value.teamId,
         'role': RoleEnumToJSON(value.role),
-        'to_email': value.toEmail,
     };
 }
 

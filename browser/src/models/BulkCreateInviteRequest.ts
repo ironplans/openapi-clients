@@ -31,13 +31,31 @@ export interface BulkCreateInviteRequest {
      * @type {string}
      * @memberof BulkCreateInviteRequest
      */
-    teamId: string;
+    sentToEmail?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BulkCreateInviteRequest
+     */
+    isClaimed?: boolean;
+    /**
+     * 
+     * @type {Date}
+     * @memberof BulkCreateInviteRequest
+     */
+    expiresAt?: Date;
     /**
      * 
      * @type {RoleEnum}
      * @memberof BulkCreateInviteRequest
      */
     role?: RoleEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BulkCreateInviteRequest
+     */
+    teamId: string;
     /**
      * 
      * @type {Array<string>}
@@ -56,8 +74,11 @@ export function BulkCreateInviteRequestFromJSONTyped(json: any, ignoreDiscrimina
     }
     return {
         
-        'teamId': json['team_id'],
+        'sentToEmail': !exists(json, 'sent_to_email') ? undefined : json['sent_to_email'],
+        'isClaimed': !exists(json, 'is_claimed') ? undefined : json['is_claimed'],
+        'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
         'role': !exists(json, 'role') ? undefined : RoleEnumFromJSON(json['role']),
+        'teamId': json['team_id'],
         'toEmails': json['to_emails'],
     };
 }
@@ -71,8 +92,11 @@ export function BulkCreateInviteRequestToJSON(value?: BulkCreateInviteRequest | 
     }
     return {
         
-        'team_id': value.teamId,
+        'sent_to_email': value.sentToEmail,
+        'is_claimed': value.isClaimed,
+        'expires_at': value.expiresAt === undefined ? undefined : (value.expiresAt.toISOString()),
         'role': RoleEnumToJSON(value.role),
+        'team_id': value.teamId,
         'to_emails': value.toEmails,
     };
 }

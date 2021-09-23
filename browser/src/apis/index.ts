@@ -9,5 +9,6 @@ export * from './OpenapiYamlApi';
 export * from './PlansApi';
 export * from './ProvidersApi';
 export * from './SubscriptionsApi';
+export * from './TeamMembershipsApi';
 export * from './TeamsApi';
 export * from './TokensApi';

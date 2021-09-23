@@ -18,9 +18,18 @@ import {
     BulkCreateInviteRequest,
     BulkCreateInviteRequestFromJSON,
     BulkCreateInviteRequestToJSON,
-    CreateInviteRequest,
-    CreateInviteRequestFromJSON,
-    CreateInviteRequestToJSON,
+    Invite,
+    InviteFromJSON,
+    InviteToJSON,
+    InviteRequest,
+    InviteRequestFromJSON,
+    InviteRequestToJSON,
+    PaginatedInviteList,
+    PaginatedInviteListFromJSON,
+    PaginatedInviteListToJSON,
+    PatchedInviteRequest,
+    PatchedInviteRequestFromJSON,
+    PatchedInviteRequestToJSON,
 } from '../models';
 
 export interface InvitesV1BulkCreateRequest {
@@ -32,7 +41,30 @@ export interface InvitesV1ClaimRetrieveRequest {
 }
 
 export interface InvitesV1CreateRequest {
-    createInviteRequest: CreateInviteRequest;
+    inviteRequest: InviteRequest;
+}
+
+export interface InvitesV1DestroyRequest {
+    id: string;
+}
+
+export interface InvitesV1ListRequest {
+    limit?: number;
+    offset?: number;
+}
+
+export interface InvitesV1PartialUpdateRequest {
+    id: string;
+    patchedInviteRequest?: PatchedInviteRequest;
+}
+
+export interface InvitesV1RetrieveRequest {
+    id: string;
+}
+
+export interface InvitesV1UpdateRequest {
+    id: string;
+    inviteRequest: InviteRequest;
 }
 
 /**
@@ -119,8 +151,8 @@ export class InvitesApi extends runtime.BaseAPI {
      * Send an invitation via email.
      */
     async invitesV1CreateRaw(requestParameters: InvitesV1CreateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.createInviteRequest === null || requestParameters.createInviteRequest === undefined) {
-            throw new runtime.RequiredError('createInviteRequest','Required parameter requestParameters.createInviteRequest was null or undefined when calling invitesV1Create.');
+        if (requestParameters.inviteRequest === null || requestParameters.inviteRequest === undefined) {
+            throw new runtime.RequiredError('inviteRequest','Required parameter requestParameters.inviteRequest was null or undefined when calling invitesV1Create.');
         }
 
         const queryParameters: any = {};
@@ -139,7 +171,7 @@ export class InvitesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: CreateInviteRequestToJSON(requestParameters.createInviteRequest),
+            body: InviteRequestToJSON(requestParameters.inviteRequest),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -150,6 +182,184 @@ export class InvitesApi extends runtime.BaseAPI {
      */
     async invitesV1Create(requestParameters: InvitesV1CreateRequest, initOverrides?: RequestInit): Promise<void> {
         await this.invitesV1CreateRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async invitesV1DestroyRaw(requestParameters: InvitesV1DestroyRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling invitesV1Destroy.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/invites/v1/{id}/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async invitesV1Destroy(requestParameters: InvitesV1DestroyRequest, initOverrides?: RequestInit): Promise<void> {
+        await this.invitesV1DestroyRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async invitesV1ListRaw(requestParameters: InvitesV1ListRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PaginatedInviteList>> {
+        const queryParameters: any = {};
+
+        if (requestParameters.limit !== undefined) {
+            queryParameters['limit'] = requestParameters.limit;
+        }
+
+        if (requestParameters.offset !== undefined) {
+            queryParameters['offset'] = requestParameters.offset;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/invites/v1/`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaginatedInviteListFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async invitesV1List(requestParameters: InvitesV1ListRequest, initOverrides?: RequestInit): Promise<PaginatedInviteList> {
+        const response = await this.invitesV1ListRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async invitesV1PartialUpdateRaw(requestParameters: InvitesV1PartialUpdateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Invite>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling invitesV1PartialUpdate.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/invites/v1/{id}/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: PatchedInviteRequestToJSON(requestParameters.patchedInviteRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InviteFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async invitesV1PartialUpdate(requestParameters: InvitesV1PartialUpdateRequest, initOverrides?: RequestInit): Promise<Invite> {
+        const response = await this.invitesV1PartialUpdateRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async invitesV1RetrieveRaw(requestParameters: InvitesV1RetrieveRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Invite>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling invitesV1Retrieve.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/invites/v1/{id}/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InviteFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async invitesV1Retrieve(requestParameters: InvitesV1RetrieveRequest, initOverrides?: RequestInit): Promise<Invite> {
+        const response = await this.invitesV1RetrieveRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async invitesV1UpdateRaw(requestParameters: InvitesV1UpdateRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<Invite>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling invitesV1Update.');
+        }
+
+        if (requestParameters.inviteRequest === null || requestParameters.inviteRequest === undefined) {
+            throw new runtime.RequiredError('inviteRequest','Required parameter requestParameters.inviteRequest was null or undefined when calling invitesV1Update.');
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/invites/v1/{id}/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: InviteRequestToJSON(requestParameters.inviteRequest),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => InviteFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async invitesV1Update(requestParameters: InvitesV1UpdateRequest, initOverrides?: RequestInit): Promise<Invite> {
+        const response = await this.invitesV1UpdateRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
 }

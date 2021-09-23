@@ -23,60 +23,60 @@ import {
 /**
  * 
  * @export
- * @interface InviteRequest
+ * @interface PatchedInviteRequest
  */
-export interface InviteRequest {
+export interface PatchedInviteRequest {
     /**
      * 
      * @type {string}
-     * @memberof InviteRequest
+     * @memberof PatchedInviteRequest
      */
-    sentToEmail: string;
+    sentToEmail?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof InviteRequest
+     * @memberof PatchedInviteRequest
      */
     isClaimed?: boolean;
     /**
      * 
      * @type {Date}
-     * @memberof InviteRequest
+     * @memberof PatchedInviteRequest
      */
     expiresAt?: Date;
     /**
      * 
      * @type {RoleEnum}
-     * @memberof InviteRequest
+     * @memberof PatchedInviteRequest
      */
     role?: RoleEnum;
     /**
      * 
      * @type {string}
-     * @memberof InviteRequest
+     * @memberof PatchedInviteRequest
      */
-    teamId: string;
+    teamId?: string;
 }
 
-export function InviteRequestFromJSON(json: any): InviteRequest {
-    return InviteRequestFromJSONTyped(json, false);
+export function PatchedInviteRequestFromJSON(json: any): PatchedInviteRequest {
+    return PatchedInviteRequestFromJSONTyped(json, false);
 }
 
-export function InviteRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): InviteRequest {
+export function PatchedInviteRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): PatchedInviteRequest {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'sentToEmail': json['sent_to_email'],
+        'sentToEmail': !exists(json, 'sent_to_email') ? undefined : json['sent_to_email'],
         'isClaimed': !exists(json, 'is_claimed') ? undefined : json['is_claimed'],
         'expiresAt': !exists(json, 'expires_at') ? undefined : (new Date(json['expires_at'])),
         'role': !exists(json, 'role') ? undefined : RoleEnumFromJSON(json['role']),
-        'teamId': json['team_id'],
+        'teamId': !exists(json, 'team_id') ? undefined : json['team_id'],
     };
 }
 
-export function InviteRequestToJSON(value?: InviteRequest | null): any {
+export function PatchedInviteRequestToJSON(value?: PatchedInviteRequest | null): any {
     if (value === undefined) {
         return undefined;
     }
