@@ -1,12 +1,15 @@
 {
-  "name": "@ironplans/browser",
+  "name": "@ironplans/api",
   "license": "MIT",
   "version": "0.0.25",
-  "description": "OpenAPI client for @ironplans/browser",
+  "description": "OpenAPI client for Iron Plans API",
   "author": "OpenAPI-Generator",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
-  "files": ["dist", "src"],
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
   "scripts": {
     "generate": "../scripts/generate.sh -d ./src",
     "build": "tsdx build",
