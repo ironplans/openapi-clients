@@ -272,11 +272,11 @@ export interface components {
     };
     Invoice: {
       id: string;
-      billing_period: components["schemas"]["BillingPeriodEnum"];
+      billing_period?: components["schemas"]["BillingPeriodEnum"];
       created_at: string;
       updated_at: string;
       team_id: string;
-      plan_name: string;
+      plan_name?: string;
       subscription_id: string | null;
       state: components["schemas"]["StateEnum"];
       stripe_payment_id?: string | null;

@@ -12,7 +12,7 @@
     "src/*"
   ],
   "scripts": {
-    "generate": "../scripts/gen-browser.sh -d ./src",
+    "generate": "../../scripts/gen-browser.sh -d ./src",
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
@@ -41,5 +41,6 @@
       "path": "dist/api.esm.js",
       "limit": "15 KB"
     }
-  ]
+  ],
+  "gitHead": "da2dd8b35c01e0a0d27e2a682f85bd7075e3155b"
 }

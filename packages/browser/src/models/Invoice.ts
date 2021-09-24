@@ -41,7 +41,7 @@ export interface Invoice {
      * @type {BillingPeriodEnum}
      * @memberof Invoice
      */
-    billingPeriod: BillingPeriodEnum;
+    billingPeriod?: BillingPeriodEnum;
     /**
      * 
      * @type {Date}
@@ -65,7 +65,7 @@ export interface Invoice {
      * @type {string}
      * @memberof Invoice
      */
-    planName: string;
+    planName?: string;
     /**
      * 
      * @type {string}
@@ -89,7 +89,7 @@ export interface Invoice {
      * @type {string}
      * @memberof Invoice
      */
-    total: string;
+    readonly total: string;
 }
 
 export function InvoiceFromJSON(json: any): Invoice {
@@ -103,11 +103,11 @@ export function InvoiceFromJSONTyped(json: any, ignoreDiscriminator: boolean): I
     return {
         
         'id': json['id'],
-        'billingPeriod': BillingPeriodEnumFromJSON(json['billing_period']),
+        'billingPeriod': !exists(json, 'billing_period') ? undefined : BillingPeriodEnumFromJSON(json['billing_period']),
         'createdAt': (new Date(json['created_at'])),
         'updatedAt': (new Date(json['updated_at'])),
         'teamId': json['team_id'],
-        'planName': json['plan_name'],
+        'planName': !exists(json, 'plan_name') ? undefined : json['plan_name'],
         'subscriptionId': json['subscription_id'],
         'state': StateEnumFromJSON(json['state']),
         'stripePaymentId': !exists(json, 'stripe_payment_id') ? undefined : json['stripe_payment_id'],
@@ -128,7 +128,6 @@ export function InvoiceToJSON(value?: Invoice | null): any {
         'plan_name': value.planName,
         'state': StateEnumToJSON(value.state),
         'stripe_payment_id': value.stripePaymentId,
-        'total': value.total,
     };
 }
 

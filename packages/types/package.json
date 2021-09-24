@@ -8,9 +8,9 @@
   "description": "Typescript types and interfaces for Iron Plans API",
   "repository": "https://github.com/ironplans/openapi-clients/types",
   "scripts": {
-    "generate": "../scripts/gen-ts-types.sh"
+    "generate": "../../scripts/gen-ts-types.sh"
   },
   "author": "team@ironplans.com",
   "license": "MIT",
-  "private": false
+  "gitHead": "da2dd8b35c01e0a0d27e2a682f85bd7075e3155b"
 }

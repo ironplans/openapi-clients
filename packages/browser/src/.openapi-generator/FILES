@@ -1,4 +1,3 @@
-.openapi-generator-ignore
 apis/AccountsApi.ts
 apis/CustomersApi.ts
 apis/FeaturesApi.ts
@@ -81,4 +80,3 @@ models/Token.ts
 models/TokenRequest.ts
 models/Usage.ts
 models/index.ts
-runtime.ts
