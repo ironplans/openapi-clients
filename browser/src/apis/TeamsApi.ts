@@ -15,6 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
+    PaginatedInvoiceList,
+    PaginatedInvoiceListFromJSON,
+    PaginatedInvoiceListToJSON,
     PaginatedTeamList,
     PaginatedTeamListFromJSON,
     PaginatedTeamListToJSON,
@@ -35,6 +38,12 @@ export interface TeamsV1CreateRequest {
 
 export interface TeamsV1DestroyRequest {
     id: string;
+}
+
+export interface TeamsV1InvoicesListRequest {
+    id: string;
+    limit?: number;
+    offset?: number;
 }
 
 export interface TeamsV1ListRequest {
@@ -127,6 +136,47 @@ export class TeamsApi extends runtime.BaseAPI {
      */
     async teamsV1Destroy(requestParameters: TeamsV1DestroyRequest, initOverrides?: RequestInit): Promise<void> {
         await this.teamsV1DestroyRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async teamsV1InvoicesListRaw(requestParameters: TeamsV1InvoicesListRequest, initOverrides?: RequestInit): Promise<runtime.ApiResponse<PaginatedInvoiceList>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling teamsV1InvoicesList.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.limit !== undefined) {
+            queryParameters['limit'] = requestParameters.limit;
+        }
+
+        if (requestParameters.offset !== undefined) {
+            queryParameters['offset'] = requestParameters.offset;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.accessToken) {
+            // oauth required
+            headerParameters["Authorization"] = await this.configuration.accessToken("OAuth2", []);
+        }
+
+        const response = await this.request({
+            path: `/teams/v1/{id}/invoices/`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaginatedInvoiceListFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async teamsV1InvoicesList(requestParameters: TeamsV1InvoicesListRequest, initOverrides?: RequestInit): Promise<PaginatedInvoiceList> {
+        const response = await this.teamsV1InvoicesListRaw(requestParameters, initOverrides);
+        return await response.value();
     }
 
     /**

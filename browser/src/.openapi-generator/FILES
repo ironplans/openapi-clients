@@ -14,6 +14,7 @@ apis/index.ts
 index.ts
 models/Account.ts
 models/AggregationEnum.ts
+models/BillingPeriodEnum.ts
 models/BulkCreateInviteRequest.ts
 models/Customer.ts
 models/CustomerPaymentIntentRequest.ts
@@ -26,12 +27,14 @@ models/FeatureSpecRequest.ts
 models/IDTokenExchangeRequest.ts
 models/Invite.ts
 models/InviteRequest.ts
+models/Invoice.ts
 models/IssueCustomerTokenRequest.ts
 models/OpEnum.ts
 models/PaginatedCustomerList.ts
 models/PaginatedFeatureList.ts
 models/PaginatedFeatureSpecList.ts
 models/PaginatedInviteList.ts
+models/PaginatedInvoiceList.ts
 models/PaginatedPlanList.ts
 models/PaginatedProviderList.ts
 models/PaginatedSubscriptionList.ts
@@ -62,6 +65,7 @@ models/RecordPeriodEnum.ts
 models/ReportUsageRequest.ts
 models/RoleEnum.ts
 models/Slug.ts
+models/StateEnum.ts
 models/Subscription.ts
 models/SubscriptionDetail.ts
 models/SubscriptionRequest.ts
