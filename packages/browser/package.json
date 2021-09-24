@@ -1,7 +1,7 @@
 {
   "name": "@ironplans/api",
   "license": "MIT",
-  "version": "0.0.28-alpha.0",
+  "version": "0.0.29-alpha.0",
   "description": "OpenAPI client for Iron Plans API",
   "author": "OpenAPI-Generator",
   "main": "./dist/index.js",
