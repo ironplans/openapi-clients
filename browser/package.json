@@ -12,7 +12,7 @@
     "src/*"
   ],
   "scripts": {
-    "generate": "../scripts/generate.sh -d ./src",
+    "generate": "../scripts/gen-browser.sh -d ./src",
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",

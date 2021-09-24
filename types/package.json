@@ -1,0 +1,14 @@
+{
+  "name": "@ironplans/types",
+  "typings": "types.ts",
+  "version": "0.0.1",
+  "files": ["types.ts"],
+  "description": "Typescript types and interfaces for Iron Plans API",
+  "repository": "https://github.com/ironplans/openapi-clients/types",
+  "scripts": {
+    "generate": "../scripts/gen-ts-types.sh"
+  },
+  "author": "team@ironplans.com",
+  "license": "MIT",
+  "private": false
+}
