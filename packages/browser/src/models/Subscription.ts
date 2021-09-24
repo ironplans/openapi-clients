@@ -57,10 +57,10 @@ export interface Subscription {
     isPaused?: boolean;
     /**
      * 
-     * @type {string}
+     * @type {boolean}
      * @memberof Subscription
      */
-    readonly isActive: string;
+    readonly isActive: boolean;
 }
 
 export function SubscriptionFromJSON(json: any): Subscription {

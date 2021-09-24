@@ -73,7 +73,7 @@ export interface TeamDetail {
      * @type {SubscriptionDetail}
      * @memberof TeamDetail
      */
-    readonly subscription: SubscriptionDetail;
+    readonly subscription: SubscriptionDetail | null;
     /**
      * 
      * @type {Array<Plan>}

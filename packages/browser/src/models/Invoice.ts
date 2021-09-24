@@ -86,10 +86,10 @@ export interface Invoice {
     stripePaymentId?: string | null;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof Invoice
      */
-    readonly total: string;
+    readonly total: number;
 }
 
 export function InvoiceFromJSON(json: any): Invoice {

@@ -280,7 +280,7 @@ export interface components {
       subscription_id: string | null;
       state: components["schemas"]["StateEnum"];
       stripe_payment_id?: string | null;
-      total: string;
+      total: number;
     };
     IssueCustomerTokenRequest: {
       customer_id?: string;
@@ -518,7 +518,7 @@ export interface components {
       start_at: string;
       end_at: string;
       is_paused?: boolean;
-      is_active: string;
+      is_active: boolean;
     };
     SubscriptionDetail: {
       id: string;
@@ -561,7 +561,7 @@ export interface components {
       name: string | null;
       members: components["schemas"]["Teammate"][];
       invites: components["schemas"]["Invite"][];
-      subscription: components["schemas"]["SubscriptionDetail"];
+      subscription: components["schemas"]["SubscriptionDetail"] | null;
       available_plans: components["schemas"]["Plan"][];
       created_at: string;
       updated_at: string;
@@ -1021,6 +1021,7 @@ export interface operations {
   invites_v1_retrieve: {
     parameters: {
       path: {
+        /** A UUID string identifying this invite. */
         id: string;
       };
     };
@@ -1035,6 +1036,7 @@ export interface operations {
   invites_v1_update: {
     parameters: {
       path: {
+        /** A UUID string identifying this invite. */
         id: string;
       };
     };
@@ -1056,6 +1058,7 @@ export interface operations {
   invites_v1_destroy: {
     parameters: {
       path: {
+        /** A UUID string identifying this invite. */
         id: string;
       };
     };
@@ -1067,6 +1070,7 @@ export interface operations {
   invites_v1_partial_update: {
     parameters: {
       path: {
+        /** A UUID string identifying this invite. */
         id: string;
       };
     };
@@ -1709,6 +1713,7 @@ export interface operations {
   team_memberships_v1_retrieve: {
     parameters: {
       path: {
+        /** A UUID string identifying this team membership. */
         id: string;
       };
     };
@@ -1723,6 +1728,7 @@ export interface operations {
   team_memberships_v1_update: {
     parameters: {
       path: {
+        /** A UUID string identifying this team membership. */
         id: string;
       };
     };
@@ -1744,6 +1750,7 @@ export interface operations {
   team_memberships_v1_destroy: {
     parameters: {
       path: {
+        /** A UUID string identifying this team membership. */
         id: string;
       };
     };
@@ -1755,6 +1762,7 @@ export interface operations {
   team_memberships_v1_partial_update: {
     parameters: {
       path: {
+        /** A UUID string identifying this team membership. */
         id: string;
       };
     };
